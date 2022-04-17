@@ -1,0 +1,19 @@
+<nav>
+	<div class = "nav-container">
+		<div>
+			<a href = "{% url 'landing-page' %}" class = "nav-link">Home</a>
+		</div>
+		<div class = "nav-links">
+			<a href = "#" class = "nav-link"></a>
+			<a href = "#" class = "nav-link"></a>
+			<a href = "#" class = "nav-link"></a>
+		</div>
+		<div>
+			{% if user.is_authenticated %}
+			<a href = "#" class = "nav-links">Notifications</a>
+			<a href = "#" class = "nav-link">Profile</a>
+			<a href = "{% url 'account_logout' %}" class = "nav-link">Logout</a>
+			{% endif %}
+		</div>
+	</div>
+</nav>
