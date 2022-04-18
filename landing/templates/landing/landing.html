@@ -3,11 +3,19 @@
 {% block title %} Welcome! {% endblock %}
 
 {% block content %}
-	<h1>Landing Page</h1>
-	<button class = "btn">
-		<a href = "{% url 'account_login' %}">Login</a>
-	</button>
-	<button class = "btn">
-		<a href = "{% url 'account_signup' %}">Register</a>
-	</button>
+	<div class = "page-container">
+		<div class = "page-content">
+			<main class = "welcome">
+				<h1>Social Media App Project Built using Django!</h1>
+				<div class  ="btn-flex">
+					<button class = "btn">
+						<a href = "{% url 'account_login' %}">Login</a>
+					</button>
+					<button class = "btn">
+						<a href = "{% url 'account_signup' %}">Register</a>
+					</button>
+				</div>
+			</main>
+		</div>
+	</div>
 {% endblock %}
