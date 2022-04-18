@@ -11,14 +11,18 @@
 				" class = "nav-link">Home</a>
 			
 		</div>
-		<div class = "nav-links">
-			<a href = "#" class = "nav-link"></a>
-			<a href = "#" class = "nav-link"></a>
-			<a href = "#" class = "nav-link"></a>
+		{% if user.is_authenticated %}
+		<div class = "search-container"> 
+			<input type = "search" class ="search" placeholder = "Search Content">
+			<button type = "submit" class = "search-submit">
+				<a href = "#" class ="search-icon"><i class="fa-solid fa-magnifying-glass"></i></a>
+			</button>
 		</div>
-		<div>
+			
+		
+		{% endif %}
+		<div class = "nav-links">
 			{% if user.is_authenticated %}
-			<a href = "#" class = "nav-links">Notifications</a>
 			<a href = "#" class = "nav-link">Profile</a>
 			<a href = "{% url 'account_logout' %}" class = "nav-link">Logout</a>
 			{% endif %}
