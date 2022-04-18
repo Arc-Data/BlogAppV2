@@ -12,6 +12,8 @@ a {
 	color: cyan;
 }
 
+/* navigation bar */
+
 nav {
 	position: fixed;
 	top: 0;
@@ -55,24 +57,6 @@ nav {
 	padding: 12px;
 }
 
-
-
-.page-content {
-	margin-top: 60px;
-	padding: 0 200px;
-	max-width: 1600px;
-	color: white;
-}
-
-.btn {
-	background: none;
-	border: 2px solid white;
-	font-size:1em;
-	padding: 10px 20px;
-	width: 100px;
-	border-radius: 6px;
-}
-
 .nav-links {
 	display: flex;
 	gap: 20px;
@@ -112,3 +96,44 @@ nav {
 	color: black;
 	margin: auto;
 }
+/* page-related */
+
+.page-container {
+	margin-top: 60px;
+
+	color: white;
+}
+
+.page-content {
+	max-width: 1110px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+/* landing page */
+
+.welcome {
+	margin: 0 auto;
+	margin-top: 150px;
+	width: 800px;
+	text-align: justify;
+	border: 2px solid white;
+	padding: 40px 20px;
+	border-radius: 8px;
+}
+
+.btn {
+	background: none;
+	border: 2px solid white;
+	font-size:1em;
+	padding: 10px 20px;
+	width: 100px;
+	border-radius: 6px;
+}
+
+.btn-flex {
+	margin-top: 40px;
+	text-align: center;
+
+}
+
