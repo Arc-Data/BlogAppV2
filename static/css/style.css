@@ -18,7 +18,7 @@ nav {
 	left: 0;
 	z-index: 1;
 	height: 60px;
-	border-bottom: 2px solid white;
+	border-bottom: 1px solid white;
 	width: 100%;
 	font-size: 16px;	
 }
