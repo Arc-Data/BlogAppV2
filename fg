@@ -1,0 +1,132 @@
+[33mcommit 64bf4703a440a87938b434eee3a5ab8dc7d88d68[m[33m ([m[1;36mHEAD -> [m[1;32mform-restyling[m[33m, [m[1;31morigin/form-restyling[m[33m)[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Tue Apr 19 07:12:57 2022 +0800
+
+    Fixed Login and Sign Up Navigation Behavior
+
+[33mcommit d719947a8df670fcd5c97a79a326539cd75c1e7e[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Tue Apr 19 07:02:31 2022 +0800
+
+    Fixed Link Color in Landing Page Buttons
+
+[33mcommit bf65e41468cb3035dfde74af740132252ecfa83b[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Tue Apr 19 06:58:53 2022 +0800
+
+    Login Form Restyled
+
+[33mcommit de331e1a5c5583e1329d37ba43f76aea2934a5fe[m[33m ([m[1;32mmain[m[33m)[m
+Merge: b397c2e 645f5b5
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Tue Apr 19 06:06:31 2022 +0800
+
+    Merge branch 'main' of https://github.com/Arc-Data/BlogAppV2
+
+[33mcommit 645f5b5d919b766e5fdf0a9a9e0b0673cd5a5627[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Tue Apr 19 06:03:41 2022 +0800
+
+    Fixed Login and Signup Page Render
+
+[33mcommit 38a9735d770932f92539a731b56bec872b8a5836[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Tue Apr 19 05:47:46 2022 +0800
+
+    Updated Landing Page
+
+[33mcommit ff7c70e1fd8e127b1469f51cd6fecb90dd60702e[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Mon Apr 18 17:24:38 2022 +0800
+
+    Nav Bottom Border Resized
+
+[33mcommit 5c024d3a3e070d486467c41dde8c3595b9660ee5[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Mon Apr 18 17:22:28 2022 +0800
+
+    Navbar Created
+
+[33mcommit b397c2e0ed39ddf2d712782f4699e8149160d9d6[m[33m ([m[1;31morigin/landing-page-restyling[m[33m)[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Tue Apr 19 06:03:41 2022 +0800
+
+    Fixed Login and Signup Page Render
+
+[33mcommit 9d1cba2b194c3f87c240eb83367bfc50a40fb5a9[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Tue Apr 19 05:47:46 2022 +0800
+
+    Updated Landing Page
+
+[33mcommit fff2bee150f9cdc6ff2510e30dd7169823fe8c52[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Mon Apr 18 17:24:38 2022 +0800
+
+    Nav Bottom Border Resized
+
+[33mcommit 970a3e5697f4b94a453d5fb4c37d3fcf4890ecbb[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Mon Apr 18 17:22:28 2022 +0800
+
+    Navbar Created
+
+[33mcommit de5e49de14ef4bc89ad46fa396b888a9ae0eb600[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Mon Apr 18 15:59:54 2022 +0800
+
+    Added Media URL
+
+[33mcommit 6615d80468f8911da43be5c240cbfcb223c63cc3[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Mon Apr 18 15:54:58 2022 +0800
+
+    Home Page Created
+
+[33mcommit 49b8c3c1e78649e2abfcce2d3002d488fc6da3cf[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Sun Apr 17 16:42:09 2022 +0800
+
+    Squashed commit of the following:
+    
+    commit 1b8afbc2a81a3260e33799e956d05f2ec00d38be
+    Author: Arc-Data <arclight04@gmail.com>
+    Date:   Sun Apr 17 16:40:52 2022 +0800
+    
+        Update navbar.html
+    
+    commit cd74b0ab8275c9badffb6cfa9594f4d747d901de
+    Author: Arc-Data <arclight04@gmail.com>
+    Date:   Sun Apr 17 16:36:02 2022 +0800
+    
+        Updated Landing Page Template with Navbar
+
+[33mcommit a4748ac13c18d16444f929d6a129253a92d88e86[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Sun Apr 17 16:01:33 2022 +0800
+
+    Landing Page Created
+
+[33mcommit 018a1daec12c05a9a179e6471185771eae2e421f[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Sun Apr 17 15:38:36 2022 +0800
+
+    Removed Menu Links from Allauth Template
+
+[33mcommit 0cefb536361e6615a467a54249acc8c4320a9df0[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Sun Apr 17 15:36:35 2022 +0800
+
+    Configured Django All-Auth
+
+[33mcommit bcd1ad3a0e76e4ff856a54f9614e0b3851d81452[m
+Author: Arc-Data <arclight04@gmail.com>
+Date:   Sun Apr 17 15:08:33 2022 +0800
+
+    Created GitIgnore
+
+[33mcommit 6e43899f3643a765aa3e89cc4fa79265871252db[m
+Author: RikuDola <85489963+Arc-Data@users.noreply.github.com>
+Date:   Sun Apr 17 15:05:18 2022 +0800
+
+    Initial commit
