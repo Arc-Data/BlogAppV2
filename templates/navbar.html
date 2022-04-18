@@ -1,7 +1,15 @@
 <nav>
 	<div class = "nav-container">
 		<div>
-			<a href = "{% url 'landing-page' %}" class = "nav-link">Home</a>
+
+			<a href = "
+			{% if user.is_authenticated %}
+				{% url 'home' %}
+			{% else %}
+				{% url 'landing-page' %}
+			{% endif %}
+				" class = "nav-link">Home</a>
+			
 		</div>
 		<div class = "nav-links">
 			<a href = "#" class = "nav-link"></a>
