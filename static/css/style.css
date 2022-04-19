@@ -4,7 +4,7 @@
 
 body {
 	font-family: 'Montserrat', sans-serif;
-	background: white;
+	background: #f5f5f5;
 }
 
 a {
@@ -12,7 +12,7 @@ a {
 }
 
 .link {
-	color: blue;
+	color: #1088eb;
 }
 
 
@@ -128,7 +128,7 @@ nav {
 
 .btn {
 	border: none;
-	background: #1d1d1d;
+	background: #1088eb;
 	color: black;
 	font-size:1em;
 	padding: 15px 26px;
@@ -161,7 +161,7 @@ nav {
 
 .form-container {
 	max-width: 400px;
-	background: #f5f5f5;
+	background: white;
 	width: 100%;
 	border: 2px solid white;
 	border-radius: 8px;
@@ -204,7 +204,7 @@ nav {
 	padding: 12px 20px;
 	border: 1px solid white;
 	border-radius: 8px;
-	background: black;
+	background: #1088eb;
 	color: white;
 }
 
