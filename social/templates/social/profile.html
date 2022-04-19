@@ -3,4 +3,13 @@
 
 {% block content %}
 {% include 'navbar.html' %}
+<div class ="profile-banner">
+	<img class = "banner" src = "{{profile.banner_pic.url}}">
+	<div class ="profile-grid">
+		<img class = "profile" src = "{{profile.profile_pic.url}}">
+		<p class = "profile-name">{{profile.username}}</p>
+	</div>
+	<div class = "banner-footer">
+	</div>
+</div>
 {% endblock %}

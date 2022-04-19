@@ -4,6 +4,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
 
+from PIL import Image
+
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete = models.CASCADE)
 	username = models.CharField(max_length = 25, blank = True, null = True, unique =True)
