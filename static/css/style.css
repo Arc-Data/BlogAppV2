@@ -3,8 +3,8 @@
 }
 
 body {
-	background: #1d1d1d;
 	font-family: 'Montserrat', sans-serif;
+	background: #f5f5f5;
 }
 
 a {
@@ -12,7 +12,7 @@ a {
 }
 
 .link {
-	color: cyan;
+	color: white;
 }
 
 
@@ -24,8 +24,9 @@ nav {
 	left: 0;
 	z-index: 1;
 	height: 60px;
-	border-bottom: 1px solid white;
 	width: 100%;
+
+	background: #1d1d1d;
 	font-size: 16px;	
 }
 
@@ -71,7 +72,7 @@ nav {
 	display: block;
 	height: 100%;
 	padding: 21px;
-	color: cyan;
+	color: white;
 }
 
 .search-submit {
@@ -106,13 +107,13 @@ nav {
 .page-container {
 	margin-top: 60px;
 
-	color: white;
 }
 
 .page-content {
 	max-width: 1110px;
 	width: 100%;
 	margin: 0 auto;
+
 }
 
 /* landing page */
@@ -120,25 +121,35 @@ nav {
 .welcome {
 	margin: 0 auto;
 	margin-top: 150px;
-	width: 800px;
-	text-align: justify;
-	border: 2px solid white;
+	width: 600px;
 	padding: 40px 20px;
 	border-radius: 8px;
 }
 
 .btn {
-	background: none;
-	border: 2px solid white;
+	border: none;
+	background: #1d1d1d;
+	color: black;
 	font-size:1em;
-	padding: 10px 20px;
-	width: 100px;
-	border-radius: 6px;
+	padding: 15px 26px;
+	width: 160px;
+	border-radius: 16px;
 }
 
 .btn-flex {
 	margin-top: 40px;
-	text-align: center;
+	display: flex;
+	gap: 40px;
+
+}
+
+.btn-link {
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: white;
+	text-transform: uppercase;
+	font-size: .8em;
 
 }
 
