@@ -10,7 +10,7 @@
 			<div class = "post-flex">
 				
 					<img src = "{{request.user.profile.profile_pic.url}}"class = "small-icon">
-					<a href = "#" class = "post-bait"><p class = "">Create a post!</p></a>
+					<a href = "{% url 'create' %}" class = "post-bait"><p class = "">Create a post!</p></a>
 			</div>
 			
 			<div></div>

@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import View 
+from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Profile
+from .models import Profile, Post
 from .forms import PostForm
 
 class HomeView(LoginRequiredMixin, View):
@@ -13,6 +14,10 @@ class HomeView(LoginRequiredMixin, View):
 		}
 		return render(request, 'social/home.html', context)
 
+
+class CreatePostView(CreateView):
+	form_class = PostForm
+	template_name = 'social/create-post.html'
 
 class ProfileView(LoginRequiredMixin, View):
 	def get(self, request, slug, *args, **kwargs):
