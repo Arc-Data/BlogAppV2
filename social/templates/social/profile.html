@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{profile.username}}'s Profile{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<div class ="profile-header">
+	<div class = "profile-banner">
+		<img class = "banner" src = "{{profile.banner_pic.url}}">
+		<div class ="profile-grid">
+			<img class = "profile" src = "{{profile.profile_pic.url}}">
+			<p class = "profile-name">{{profile.username}}</p>
+		</div>
+		<div class = "banner-footer">
+		</div>
+	</div>
+	<div class = "profile-details">
+		<div></div>
+		<div>Account created on {{profile.date_joined}}</div>
+		<div class = "profile-action">
+				{% if profile.user == request.user %}
+				<button type = "submit" class = "btn">Edit Profile</button>
+				{% else %}
+				<form action = "" method = "POST">
+				
+				</form>
+				{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}
