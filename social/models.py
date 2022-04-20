@@ -1,8 +1,10 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save 
 from django.dispatch import receiver
 from django.utils.text import slugify
+
 
 from PIL import Image
 
@@ -11,6 +13,7 @@ class Profile(models.Model):
 	username = models.CharField(max_length = 25, blank = True, null = True, unique =True)
 	profile_pic = models.ImageField(upload_to = 'uploads/profile_pictures', default = "uploads/profile_pictures/default-blue.png")
 	banner_pic = models.ImageField(upload_to = 'uploads/banner_pictures', default = "uploads/banner_pictures/740377.png")
+	date_joined = models.DateField(editable = False)
 	slug = models.SlugField(unique = True)
 
 	def __str__(self):
@@ -22,7 +25,8 @@ def create_profile(sender, instance, created, **kwargs):
 		Profile.objects.create(
 			user = instance,
 			username = instance.username,
-			slug = slugify(instance.username)
+			slug = slugify(instance.username),
+			date_joined = timezone.now()
 			)
 		print('Profile Attached')
 
