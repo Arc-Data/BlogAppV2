@@ -321,7 +321,7 @@ nav {
 
 /* homepage */
 
-.home-container {
+.main-container {
 	padding: 20px;
 	display: grid;
 	grid-template-columns: 1fr 290px;	
@@ -358,4 +358,22 @@ nav {
 
 .post-bait:hover {
 	border: 1px solid black;
+}
+
+/* create-post */
+
+.text-input {
+	resize: none;
+	width: 100%;
+	padding: 10px;
+	font-size: 18px;
+	background: #f5f5f5;
+}
+
+
+
+.post-card {
+	background: white;
+	padding: 20px;
+	box-shadow: 1px 1px 3px #ccc;
 }

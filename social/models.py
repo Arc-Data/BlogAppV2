@@ -13,6 +13,12 @@ class Post(models.Model):
 	body = models.TextField()
 	created_on = models.DateField(editable = False)
 
+	def save(self, *args, **kwargs):
+		if not self.id:
+			self.created_on = timezone.now()
+		return super(Post, self).save(*args, **kwargs)
+
+
 	
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete = models.CASCADE)
