@@ -328,24 +328,11 @@ nav {
 	grid-gap: 10px;
 }
 
-.post-flex {
-	width: 100%;
-	padding: 0px 20px;
+.post-create {
 	height: 66px;
-	display: grid;
-	grid-template-columns: auto 1fr;
-	background: white;
-	box-shadow: 1px 1px 3px #ccc;
-	gap: 20px;
-	border: 1px solid #1088eb;
+	
 	align-items: center;
 	cursor: text;
-}
-
-.small-icon {
-	height: 40px;
-	width: 40px;
-	border-radius: 50%;
 }
 
 .post-bait {
@@ -360,6 +347,32 @@ nav {
 	border: 1px solid black;
 }
 
+.post-article {
+	margin-top: 10px;
+	align-items: center;
+}
+
+.post-container {
+	border: 1px solid #1088eb;
+	box-shadow: 1px 1px 3px #ccc;
+	gap: 20px;
+
+	padding: 10px 20px;
+	width: 100%;
+	background: white;
+	display: grid;
+	grid-template-columns: 40px 1fr;
+
+
+}
+
+.small-icon {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+}
+
+
 /* create-post */
 
 .text-input {
@@ -370,10 +383,19 @@ nav {
 	background: #f5f5f5;
 }
 
-
+.details {
+	font-size: 8px;
+	color: #1d1d1d;
+}
 
 .post-card {
 	background: white;
 	padding: 20px;
 	box-shadow: 1px 1px 3px #ccc;
+}
+
+.post-content {
+	grid-column: 1/-1;
+	width: 100%;
+	text-indent: 40px;
 }

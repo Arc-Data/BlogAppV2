@@ -9,13 +9,14 @@ from django.utils.text import slugify
 from PIL import Image
 
 class Post(models.Model):
-	author = models.ForeignKey('Profile',blank = True, null = True,on_delete = models.CASCADE)
+	author = models.ForeignKey('Profile', blank = True, null = True,on_delete = models.CASCADE)
 	body = models.TextField()
 	created_on = models.DateField(editable = False)
 
 	def save(self, *args, **kwargs):
 		if not self.id:
 			self.created_on = timezone.now()
+		
 		return super(Post, self).save(*args, **kwargs)
 
 
