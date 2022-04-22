@@ -3,11 +3,11 @@ from django.utils import timezone
 from django.utils.timezone import datetime
 from django.urls import reverse
 from django.views.generic import View 
-from django.views.generic import CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from .models import Profile, Post
-from .forms import PostForm
+from .forms import PostForm, ProfileForm
 
 class HomeView(LoginRequiredMixin, View):
 	def get(self, request, *args, **kwargs):
@@ -41,5 +41,15 @@ class ProfileView(LoginRequiredMixin, View):
 			'profile':profile,
 		}
 		return render(request, 'social/profile.html', context)
+
+class ProfileEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+	form_class = ProfileForm
+	model = Profile
+	template_name = 'social/profile-edit.html'
+
+	def test_func(self):
+		print(self.get_object())
+		return self.get_object() == self.request.user.profile 
+
 
 # Create your views here.
