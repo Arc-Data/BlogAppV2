@@ -333,6 +333,8 @@ nav {
 	
 	align-items: center;
 	cursor: text;
+	border: 1px solid #1088eb;
+
 }
 
 .post-bait {
@@ -353,7 +355,6 @@ nav {
 }
 
 .post-container {
-	border: 1px solid #1088eb;
 	box-shadow: 1px 1px 3px #ccc;
 	gap: 20px;
 
@@ -404,5 +405,6 @@ nav {
 
 .profile-form {
 	margin-top: 20px;
-	max-width: 800px;	
+	max-width: 100%;
+	width: 100%;	
 }

@@ -6,10 +6,13 @@
 		{% csrf_token %}
 		<div class = "form-content">
 			<div class = "form-group">
-				<h3><a href = "{% url 'profile' profile.slug %}">Return</a></h3>
+				<h3><a href = "{% url 'profile' profile.slug %}"><i class="fa-solid fa-caret-left"></i> Return</a></h3>
 			</div>
+			<hr>
+			<br>
 			<div class = "form-group">
-			{{form.username}}
+				<h3>Enter your new username :</h3> 
+				{{form.username}}
 			</div>
 			<div class ="form-group">
 				{{form.profile_pic}}
