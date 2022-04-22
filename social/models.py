@@ -11,7 +11,7 @@ from PIL import Image
 class Post(models.Model):
 	author = models.ForeignKey('Profile', blank = True, null = True,on_delete = models.CASCADE)
 	body = models.TextField()
-	created_on = models.DateField(editable = False)
+	created_on = models.DateTimeField(editable = False)
 
 	def save(self, *args, **kwargs):
 		if not self.id:

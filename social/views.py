@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
+from django.utils.timezone import datetime
 from django.urls import reverse
 from django.views.generic import View 
 from django.views.generic import CreateView
@@ -11,10 +12,12 @@ from .forms import PostForm
 class HomeView(LoginRequiredMixin, View):
 	def get(self, request, *args, **kwargs):
 		form = PostForm
-		posts = Post.objects.all()
+		posts = Post.objects.all().order_by('-created_on')
+		current_time = timezone.now()
 		context = {
 			'form':form,
 			'posts':posts,
+			'current_time': current_time,
 		}
 		return render(request, 'social/home.html', context)
 
@@ -25,6 +28,7 @@ class CreatePostView(CreateView):
 
 	def form_valid(self, form):
 		form.instance.author = self.request.user.profile 
+
 		return super().form_valid(form)
 
 	def get_success_url(self):
@@ -33,7 +37,6 @@ class CreatePostView(CreateView):
 class ProfileView(LoginRequiredMixin, View):
 	def get(self, request, slug, *args, **kwargs):
 		profile = Profile.objects.get(slug = slug)
-
 		context = {
 			'profile':profile,
 		}
