@@ -261,8 +261,8 @@ nav {
 
 
 .profile {
-	height: 150px;
-	width: 150px;
+	height: 160px;
+	width: 160px;
 	border-radius: 50%;
 	border: 3px solid white;
 
@@ -333,6 +333,8 @@ nav {
 	
 	align-items: center;
 	cursor: text;
+	border: 1px solid #1088eb;
+
 }
 
 .post-bait {
@@ -353,7 +355,6 @@ nav {
 }
 
 .post-container {
-	border: 1px solid #1088eb;
 	box-shadow: 1px 1px 3px #ccc;
 	gap: 20px;
 
@@ -398,4 +399,12 @@ nav {
 	grid-column: 1/-1;
 	width: 100%;
 	text-indent: 40px;
+}
+
+/* profile-edit */
+
+.profile-form {
+	margin-top: 20px;
+	max-width: 100%;
+	width: 100%;	
 }

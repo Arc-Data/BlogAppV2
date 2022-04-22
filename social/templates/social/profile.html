@@ -4,29 +4,34 @@
 {% block content %}
 {% include 'navbar.html' %}
 <div class = "page-content">
-<div class ="profile-header">
-	<div class = "profile-banner">
-		<img class = "banner" src = "{{profile.banner_pic.url}}">
-		<div class ="profile-grid">
-			<img class = "profile" src = "{{profile.profile_pic.url}}">
-			<p class = "profile-name">{{profile.username}}</p>
+	<div class ="profile-header">
+		<div class = "profile-banner">
+			<img class = "banner" src = "{{profile.banner_pic.url}}">
+			<div class ="profile-grid">
+				<img class = "profile" src = "{{profile.profile_pic.url}}">
+				<p class = "profile-name">{{profile.username}}</p>
+			</div>
+			<div class = "banner-footer">
+			</div>
 		</div>
-		<div class = "banner-footer">
+		<div class = "profile-details">
+			<div></div>
+			<div>Account created on {{profile.date_joined}}</div>
+			<div class = "profile-action">
+					{% if profile.user == request.user %}
+					<a href = "{% url 'profile-edit' profile.slug %}"><button type = "submit" class = "btn">Edit Profile</button></a>
+					{% else %}
+					<form action = "" method = "POST">
+					
+					</form>
+					{% endif %}
+			</div>
 		</div>
 	</div>
-	<div class = "profile-details">
-		<div></div>
-		<div>Account created on {{profile.date_joined}}</div>
-		<div class = "profile-action">
-				{% if profile.user == request.user %}
-				<button type = "submit" class = "btn">Edit Profile</button>
-				{% else %}
-				<form action = "" method = "POST">
-				
-				</form>
-				{% endif %}
-		</div>
+	<div>
+		{% block profile-content %}
+
+		{% endblock %}
 	</div>
-</div>
 </div>
 {% endblock %}

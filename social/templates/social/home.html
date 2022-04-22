@@ -16,7 +16,7 @@
 				<div class = "post-container post-article">
 					<img src = "{{post.author.profile_pic.url}}" class = "small-icon">
 					<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>
-					<p class = "post-content"> {{post.body | truncatechars:30}}</p>
+					<p class = "post-content"> {{post.body | truncatewords:30}}</p>
 				</div>
 				{% endfor %}
 			</div>

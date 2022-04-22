@@ -1,0 +1,29 @@
+{% extends 'social/profile.html' %}
+
+{% block profile-content %}
+<div class = "form-container profile-form">
+	<form enctype = "multipart/form-data"method = "POST" action = "">
+		{% csrf_token %}
+		<div class = "form-content">
+			<div class = "form-group">
+				<h3><a href = "{% url 'profile' profile.slug %}"><i class="fa-solid fa-caret-left"></i> Return</a></h3>
+			</div>
+			<hr>
+			<br>
+			<div class = "form-group">
+				<h3>Enter your new username :</h3> 
+				{{form.username}}
+			</div>
+			<div class ="form-group">
+				{{form.profile_pic}}
+			</div>
+			<div class = "form-group">
+			{{form.banner_pic}}
+			</div>
+		</div>
+		<div class = "form-footer">
+		<button type = "submit">Save</button>
+		</div>
+	</form>
+</div>
+{% endblock %}
