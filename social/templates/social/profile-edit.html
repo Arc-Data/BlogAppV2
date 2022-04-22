@@ -1,7 +1,26 @@
 {% extends 'social/profile.html' %}
 
 {% block profile-content %}
-<div>Woah, poggers</div>
-
-{{form.as_p}}
+<div class = "form-container profile-form">
+	<form enctype = "multipart/form-data"method = "POST" action = "">
+		{% csrf_token %}
+		<div class = "form-content">
+			<div class = "form-group">
+				<h3><a href = "{% url 'profile' profile.slug %}">Return</a></h3>
+			</div>
+			<div class = "form-group">
+			{{form.username}}
+			</div>
+			<div class ="form-group">
+				{{form.profile_pic}}
+			</div>
+			<div class = "form-group">
+			{{form.banner_pic}}
+			</div>
+		</div>
+		<div class = "form-footer">
+		<button type = "submit">Save</button>
+		</div>
+	</form>
+</div>
 {% endblock %}

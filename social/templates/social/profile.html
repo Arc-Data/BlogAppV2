@@ -19,7 +19,7 @@
 			<div>Account created on {{profile.date_joined}}</div>
 			<div class = "profile-action">
 					{% if profile.user == request.user %}
-					<button type = "submit" class = "btn">Edit Profile</button>
+					<a href = "{% url 'profile-edit' profile.slug %}"><button type = "submit" class = "btn">Edit Profile</button></a>
 					{% else %}
 					<form action = "" method = "POST">
 					

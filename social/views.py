@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.utils import timezone
 from django.utils.timezone import datetime
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import View 
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -48,8 +48,9 @@ class ProfileEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	template_name = 'social/profile-edit.html'
 
 	def test_func(self):
-		print(self.get_object())
 		return self.get_object() == self.request.user.profile 
 
+	def get_success_url(self, **kwargs):
+		return reverse_lazy('profile', kwargs = {'slug': self.kwargs['slug']})
 
 # Create your views here.
