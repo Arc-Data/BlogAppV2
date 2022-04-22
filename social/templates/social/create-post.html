@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Create Post {% endblock %}
+
+{% block content %} 
+{% include 'navbar.html' %}
+<div class = "page-container">
+	<div class = "page-content">
+		<div class = "main-container">
+			<div class = "post-card">
+				<h3>Write a Post!</h3>
+				<form class = "" method = "POST" action = "">
+					{% csrf_token %}
+					{{form.body}}
+					<div class = "form-footer">
+					<button type = "submit" class = "btn">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

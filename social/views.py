@@ -1,14 +1,38 @@
 from django.shortcuts import render
+from django.utils import timezone
+from django.utils.timezone import datetime
+from django.urls import reverse
 from django.views.generic import View 
+from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Profile
+from .models import Profile, Post
+from .forms import PostForm
 
 class HomeView(LoginRequiredMixin, View):
 	def get(self, request, *args, **kwargs):
+		form = PostForm
+		posts = Post.objects.all().order_by('-created_on')
+		current_time = timezone.now()
+		context = {
+			'form':form,
+			'posts':posts,
+			'current_time': current_time,
+		}
+		return render(request, 'social/home.html', context)
 
-		return render(request, 'social/home.html', {})
 
+class CreatePostView(CreateView):
+	form_class = PostForm
+	template_name = 'social/create-post.html'
+
+	def form_valid(self, form):
+		form.instance.author = self.request.user.profile 
+
+		return super().form_valid(form)
+
+	def get_success_url(self):
+		return reverse('home')
 
 class ProfileView(LoginRequiredMixin, View):
 	def get(self, request, slug, *args, **kwargs):

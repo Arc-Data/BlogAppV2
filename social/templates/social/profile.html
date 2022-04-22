@@ -3,6 +3,7 @@
 
 {% block content %}
 {% include 'navbar.html' %}
+<div class = "page-content">
 <div class ="profile-header">
 	<div class = "profile-banner">
 		<img class = "banner" src = "{{profile.banner_pic.url}}">
@@ -26,5 +27,6 @@
 				{% endif %}
 		</div>
 	</div>
+</div>
 </div>
 {% endblock %}
