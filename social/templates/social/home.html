@@ -18,7 +18,7 @@
 					<a href ="{% url 'post' post.id %}" class = "post-link">
 					
 						<div class = "post-content">
-							<a href = "{% url 'profile' post.author.slug %}">
+							<a href = "{% url 'profile' post.author.slug %}" class = "profile-link">
 								<img src = "{{post.author.profile_pic.url}}" class = "small-icon">
 							</a>
 							<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>
