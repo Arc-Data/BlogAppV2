@@ -34,6 +34,14 @@ class CreatePostView(CreateView):
 	def get_success_url(self):
 		return reverse('home')
 
+class DetailPostView(LoginRequiredMixin, View):
+	def get(self, request, id, *args, **kwargs):
+		post = Post.objects.get(id = id)
+		context = {
+			'post':post,
+		}
+		return render(request, 'social/post-detail.html', context)
+
 class ProfileView(LoginRequiredMixin, View):
 	def get(self, request, slug, *args, **kwargs):
 		profile = Profile.objects.get(slug = slug)

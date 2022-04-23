@@ -330,7 +330,8 @@ nav {
 
 .post-create {
 	height: 66px;
-	
+	display: grid;
+	grid-template-columns: auto 1fr;
 	align-items: center;
 	cursor: text;
 	border: 1px solid #1088eb;
@@ -352,19 +353,22 @@ nav {
 .post-article {
 	margin-top: 10px;
 	align-items: center;
+	position: relative;
 }
 
 .post-container {
 	box-shadow: 1px 1px 3px #ccc;
 	gap: 20px;
-
 	padding: 10px 20px;
 	width: 100%;
 	background: white;
-	display: grid;
+
+}
+
+.post-content {
+	display :grid;
 	grid-template-columns: 40px 1fr;
-
-
+	gap: 20px;
 }
 
 .small-icon {
@@ -395,10 +399,22 @@ nav {
 	box-shadow: 1px 1px 3px #ccc;
 }
 
-.post-content {
+.post-body {
 	grid-column: 1/-1;
 	width: 100%;
 	text-indent: 40px;
+}
+
+.post-link {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.post-full {
+	grid-column: 1/-1;
 }
 
 /* profile-edit */
@@ -408,3 +424,4 @@ nav {
 	max-width: 100%;
 	width: 100%;	
 }
+
