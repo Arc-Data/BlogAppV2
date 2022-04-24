@@ -28,6 +28,7 @@ class Profile(models.Model):
 	banner_pic = models.ImageField(upload_to = 'uploads/banner_pictures', default = "uploads/banner_pictures/740377.png")
 	date_joined = models.DateField(editable = False)
 	slug = models.SlugField(unique = True)
+	followers = models.ManyToManyField(User, blank = True, related_name = 'followers')
 
 	def __str__(self):
 		return self.username
