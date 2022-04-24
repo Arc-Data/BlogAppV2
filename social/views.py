@@ -51,6 +51,11 @@ class DetailPostView(LoginRequiredMixin, View):
 	def get(self, request, pk, *args, **kwargs):
 		post = Post.objects.get(id = pk)
 		previous = self.request.META.get('HTTP_REFERER')
+		
+		current = self.request.build_absolute_uri()
+
+		if previous == current + 'edit/' or previous == current + 'delete/':
+			previous = None 
 
 		context = {
 			'post':post,

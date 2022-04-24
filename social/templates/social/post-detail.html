@@ -10,10 +10,11 @@
 			<h3>
 				{% if previous %}
 				<a href = "{{previous}}" class ="return-page">
+				<i class="fa-solid fa-caret-left"></i> Return</a>
 				{% else %}
-				<a href = "{% url 'home' %}">
+				<a href = "{% url 'home' %}" class = "return-page">
+				<i class="fa-solid fa-caret-left"></i> Home</a>
 				{% endif %}
-				<i class="fa-solid fa-caret-left"></i> Return To Previous Page</a>
 			</h3>
 			<div class = "post-container post-article post-full">
 				<div class = "post-content">
