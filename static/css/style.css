@@ -461,3 +461,9 @@ nav {
 .btn-warning {
 	background: red;
 }
+
+.return-page {
+	padding: 10px 12px;
+	color: #1088eb;
+	text-decoration: underline;
+}

@@ -9,11 +9,11 @@
 			<div class = "main-container">
 			<h3>
 				{% if previous %}
-				<a href = "{{previous}}">
+				<a href = "{{previous}}" class ="return-page">
 				{% else %}
 				<a href = "{% url 'home' %}">
 				{% endif %}
-				Return</a>
+				<i class="fa-solid fa-caret-left"></i> Return To Previous Page</a>
 			</h3>
 			<div class = "post-container post-article post-full">
 				
