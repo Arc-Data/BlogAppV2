@@ -38,8 +38,10 @@ class CreatePostView(CreateView):
 class DetailPostView(LoginRequiredMixin, View):
 	def get(self, request, id, *args, **kwargs):
 		post = Post.objects.get(id = id)
+		previous = self.request.META['HTTP_REFERER']
 		context = {
 			'post':post,
+			'previous':previous,
 		}
 		return render(request, 'social/post-detail.html', context)
 
@@ -47,6 +49,7 @@ class DetailPostView(LoginRequiredMixin, View):
 class ProfileView(LoginRequiredMixin, View):
 	def get(self, request, slug, *args, **kwargs):
 		profile = Profile.objects.get(slug = slug)
+		posts = Post.objects.filter(author = profile).order_by('-created_on')
 		users = profile.followers.all()
 		is_following = False
 
@@ -60,8 +63,9 @@ class ProfileView(LoginRequiredMixin, View):
 		context = {
 			'profile':profile,
 			'is_following':is_following,
+			'posts':posts,
 		}
-		return render(request, 'social/profile.html', context)
+		return render(request, 'social/profile-overview.html', context)
 
 class ProfileEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	form_class = ProfileForm
