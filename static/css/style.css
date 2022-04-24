@@ -384,7 +384,7 @@ nav {
 
 .post-footer {
 	display: grid;
-	max-width: 300px;
+	max-width: 400px;
 	border-top: 1px solid #ccc;
 	text-align: center;
 	justify-items: space-evenly;
@@ -392,8 +392,15 @@ nav {
 	grid-gap: 20px;
 	margin: 40px auto 0;
 	padding-top: 10px;
+	position: relative;
+
+	z-index: 30;
 
 }
+
+/* comment-section */
+
+
 
 
 /* create-post */
@@ -418,9 +425,8 @@ nav {
 }
 
 .post-body {
-	grid-column: 1/-1;
+	grid-column: 2;
 	width: 100%;
-	text-indent: 40px;
 }
 
 .post-link {

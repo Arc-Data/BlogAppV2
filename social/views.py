@@ -38,7 +38,8 @@ class CreatePostView(CreateView):
 class DetailPostView(LoginRequiredMixin, View):
 	def get(self, request, id, *args, **kwargs):
 		post = Post.objects.get(id = id)
-		previous = self.request.META['HTTP_REFERER']
+		previous = self.request.META.get('HTTP_REFERER')
+
 		context = {
 			'post':post,
 			'previous':previous,

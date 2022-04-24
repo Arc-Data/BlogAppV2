@@ -12,8 +12,12 @@
 			</a>
 			<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>
 			<p class = "post-body"> {{post.body }}</p>
-		</div>
-
+			</div>
+			<div class = "post-footer">
+				<i class="fa-regular fa-heart"></i>
+				<i class="fa-regular fa-message"></i>
+				<i class="fa-solid fa-share-nodes"></i>
+			</div>
 	</div>
 	{% endfor %}
 	</div>
