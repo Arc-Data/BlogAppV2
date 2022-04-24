@@ -33,11 +33,23 @@ class CreatePostView(CreateView):
 		return super().form_valid(form)
 
 	def get_success_url(self):
-		return reverse('home')
+		return reverse_lazy('home')
+
+class EditPostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+	form_class = PostForm 
+	model = Post
+	template_name = 'social/post-edit.html'
+
+	def test_func(self):
+		return self.get_object().author == self.request.user.profile
+
+	def get_success_url(self, **kwargs):
+		return reverse_lazy('post', kwargs = {'pk':self.kwargs['pk']})
+
 
 class DetailPostView(LoginRequiredMixin, View):
-	def get(self, request, id, *args, **kwargs):
-		post = Post.objects.get(id = id)
+	def get(self, request, pk, *args, **kwargs):
+		post = Post.objects.get(id = pk)
 		previous = self.request.META.get('HTTP_REFERER')
 
 		context = {
