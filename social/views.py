@@ -40,6 +40,12 @@ class EditPostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = Post
 	template_name = 'social/post-edit.html'
 
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['previous'] = self.request.META.get('HTTP_REFERER')
+
+		return context
+
 	def test_func(self):
 		return self.get_object().author == self.request.user.profile
 

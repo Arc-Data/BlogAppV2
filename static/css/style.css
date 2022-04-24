@@ -25,7 +25,7 @@ nav {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 20;
+	z-index: 90;
 	height: 60px;
 	width: 100%;
 
