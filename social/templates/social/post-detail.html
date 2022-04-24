@@ -16,21 +16,28 @@
 				<i class="fa-solid fa-caret-left"></i> Return To Previous Page</a>
 			</h3>
 			<div class = "post-container post-article post-full">
-				
-					<div class = "post-content">
+				<div class = "post-content">
+					<div>
 						<a href = "{% url 'profile' post.author.slug %}">
 							<img src = "{{post.author.profile_pic.url}}" class = "small-icon">
 						</a>
+					</div>
+					<div class = "post-detail">
 						<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>
-						<p class = "post-body"> {{post.body }}</p>
+						<div class = "flex-icons">
+							<a href = "#"><i class="fa-solid fa-pen" title = "Edit Post"></i></a>
+							<a href = "#">
+							<i class="fa-regular fa-trash-can"  title = "Delete Post"></i>
+							</a>
+						</div>
 					</div>
-					<div class = "post-footer">
-						<i class="fa-regular fa-heart"></i>
-						<i class="fa-regular fa-message"></i>
-						<i class="fa-solid fa-share-nodes"></i>
-
-					</div>
-
+					<p class = "post-body"> {{post.body }}</p>
+				</div>
+				<div class = "post-footer">
+					<i class="fa-regular fa-heart"></i>
+					<i class="fa-regular fa-message"></i>
+					<i class="fa-solid fa-share-nodes"></i>
+				</div>
 			</div>
 			
 			<div class = "comments-section post-full">

@@ -382,6 +382,13 @@ nav {
 	border-radius: 50%;
 }
 
+.post-detail {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .post-footer {
 	display: grid;
 	max-width: 400px;
@@ -395,7 +402,11 @@ nav {
 	position: relative;
 
 	z-index: 30;
+}
 
+.flex-icons {
+	display: flex;
+	gap: 20px;
 }
 
 /* comment-section */
