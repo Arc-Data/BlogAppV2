@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}{{post.body | truncatechars:20}}{% endblock %}
+
+{% block content %}
+	{% include 'navbar.html' %}
+	<div class = "page-container">
+		<div class = "page-content">
+			<div class = "main-container">
+			<h3>Return</h3>
+			<div class = "post-container post-article post-full">
+				
+					<div class = "post-content">
+						<a href = "{% url 'profile' post.author.slug %}">
+							<img src = "{{post.author.profile_pic.url}}" class = "small-icon">
+						</a>
+						<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>
+						<p class = "post-body"> {{post.body }}</p>
+					</div>
+
+			</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
