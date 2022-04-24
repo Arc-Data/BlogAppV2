@@ -25,7 +25,7 @@ nav {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 9;
+	z-index: 20;
 	height: 60px;
 	width: 100%;
 
@@ -435,6 +435,9 @@ nav {
 	max-width: 100%;
 	width: 100%;	
 }
+
+
+/* utility */
 
 .btn-warning {
 	background: red;
