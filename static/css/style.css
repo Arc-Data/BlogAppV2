@@ -405,8 +405,10 @@ nav {
 }
 
 .flex-icons {
+	position: relative;
 	display: flex;
 	gap: 20px;
+	z-index: 30;
 }
 
 /* comment-section */

@@ -15,22 +15,33 @@
 				{% for post in posts %}
 				
 				<div class = "post-container post-article">
-					<a href ="{% url 'post' post.id %}" class = "post-link">
 					
-						<div class = "post-content">
-							<a href = "{% url 'profile' post.author.slug %}" class = "profile-link">
-								<img src = "{{post.author.profile_pic.url}}" class = "small-icon">
-							</a>
+					<div class = "post-content">
+						<a href = "{% url 'profile' post.author.slug %}" class = "profile-link">
+							<img src = "{{post.author.profile_pic.url}}" class = "small-icon">
+						</a>
+						<div class = "post-detail">
 							<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>
-							<p class = "post-body"> {{post.body | truncatewords:30}}</p>
+							
+							{% if request.user.profile == post.author %}
+							<div class = "flex-icons">
+								<a href = "{% url 'post-edit' post.id %}"><i class="fa-solid fa-pen" title = "Edit Post"></i></a>
+								
+								<a href = "#"><i class="fa-regular fa-trash-can"  title = "Delete Post"></i>
+								</a>
+							</div>
+							{% endif %}
 						</div>
-
-					</a>
+						<p class = "post-body"> {{ post.body }}</p>
+					</div>
+					
 					<div class = "post-footer">
 						<i class="fa-regular fa-heart"></i>
 						<i class="fa-regular fa-message"></i>
 						<i class="fa-solid fa-share-nodes"></i>
 					</div>
+
+					<a href ="{% url 'post' post.id %}" class = "post-link"></a>
 				</div>
 				
 				{% endfor %}
