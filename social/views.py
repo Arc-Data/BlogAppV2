@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.utils.timezone import datetime
 from django.urls import reverse, reverse_lazy
 from django.views.generic import View 
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from .models import Profile, Post
@@ -52,6 +52,22 @@ class EditPostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	def get_success_url(self, **kwargs):
 		return reverse_lazy('post', kwargs = {'pk':self.kwargs['pk']})
 
+
+class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	template_name = 'social/post-delete.html'
+	model = Post 
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['previous'] = self.request.META.get('HTTP_REFERER')
+
+		return context
+
+	def test_func(self):
+		return self.get_object().author == self.request.user.profile 
+
+	def get_success_url(self):
+		return reverse('home')
 
 class DetailPostView(LoginRequiredMixin, View):
 	def get(self, request, pk, *args, **kwargs):

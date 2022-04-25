@@ -7,6 +7,7 @@ urlpatterns = [
 	
 	path('post/<int:pk>/', DetailPostView.as_view(), name = "post"),
 	path('post/<int:pk>/edit/', EditPostView.as_view(), name = 'post-edit'),
+	path('post/<int:pk>/delete/', DeletePostView.as_view(), name = "post-delete"),
 
 	path('profile/<slug:slug>/', ProfileView.as_view(), name = "profile"),
 	path('profile/<slug:slug>/follow/', FollowProfile.as_view(), name = "follow-profile"),
