@@ -20,6 +20,17 @@ class Post(models.Model):
 		return super(Post, self).save(*args, **kwargs)
 
 
+class Comment(models.Model):
+	post = models.ForeignKey('Post', on_delete = models.CASCADE, blank = True)
+	author = models.ForeignKey('Profile', on_delete = models.CASCADE, blank = True)	
+	content = models.CharField(max_length = 200, blank = True)
+	created_on = models.DateTimeField(editable = False)
+
+	def save(self, *args, **kwargs):
+		if not self.id:
+			self.created_on = timezone.now() 
+
+		return super(Comment, self).save(*args, **kwargs)
 	
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete = models.CASCADE)
@@ -32,6 +43,8 @@ class Profile(models.Model):
 
 	def __str__(self):
 		return self.username
+
+
 
 @receiver(post_save, sender = User)
 def create_profile(sender, instance, created, **kwargs):

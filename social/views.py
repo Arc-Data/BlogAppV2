@@ -6,8 +6,8 @@ from django.views.generic import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from .models import Profile, Post
-from .forms import PostForm, ProfileForm
+from .models import Profile, Post, Comment
+from .forms import PostForm, ProfileForm, CommentForm
 
 class HomeView(LoginRequiredMixin, View):
 	def get(self, request, *args, **kwargs):
@@ -71,10 +71,12 @@ class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class DetailPostView(LoginRequiredMixin, View):
 	def get(self, request, pk, *args, **kwargs):
-		post = Post.objects.get(id = pk)
 		previous = self.request.META.get('HTTP_REFERER')
-		
 		current = self.request.build_absolute_uri()
+		
+		post = Post.objects.get(id = pk)
+		form = CommentForm
+		comments = Comment.objects.filter(post = post).order_by('-created_on')
 
 		if previous == current + 'edit/' or previous == current + 'delete/':
 			previous = None 
@@ -82,8 +84,38 @@ class DetailPostView(LoginRequiredMixin, View):
 		context = {
 			'post':post,
 			'previous':previous,
+			'form':form,
+			'comments':comments,
 		}
 		return render(request, 'social/post-detail.html', context)
+
+	def post(self, request, pk, *args, **kwargs):
+		previous = self.request.META.get('HTTP_REFERER')
+		current = self.request.build_absolute_uri()
+
+		post = Post.objects.get(id = pk)
+		form = CommentForm(request.POST)
+		comments = Comment.objects.filter(post = post).order_by('-created_on')
+
+		if previous == current + 'edit/' or previous == current + 'delete/':
+			previous = None 
+
+		if form.is_valid():
+			new_comment = form.save(commit = False)
+			new_comment.author = self.request.user.profile 
+			new_comment.post = post 
+			new_comment.save()
+
+			return redirect('post', post.id)
+
+		context = {
+			'post':post,
+			'previous':previous,
+			'form':form,
+			'comments':comments,
+		}
+		return render(request, 'social/post-detail.html', context)
+
 
 
 class ProfileView(LoginRequiredMixin, View):

@@ -47,7 +47,23 @@
 			
 			<div class = "comments-section post-full">
 				<h3>Comments</h3>
-				<hr>
+				<br>
+
+				<form method = "POST" action = "">
+					{% csrf_token %}
+					<div class = "post-content ">
+						<a href = "{% url 'profile' request.user.profile.slug%}"><img src = "{{request.user.profile.profile_pic.url}}" class = "small-icon"></a>
+						{{	form.content }}
+					</div>
+					<div class = "comment-buttons">
+						<button type = "reset" class = "comment-btn comment-clear">Clear</button>
+						<button type = "submit" class = "comment-btn comment-post">Post</button>
+					</div>
+				</form>
+
+				{% for comment in comments %}
+				<p>{{comment.content}}</p>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
