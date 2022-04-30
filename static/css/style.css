@@ -503,6 +503,15 @@ nav {
 }
 
 
+.comment-box {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-gap: 10px;
+	align-items: center;
+	border-bottom: 1px solid #ccc;
+	padding: 12px 16px;
+}
+
 /* utility */
 
 .btn-warning {

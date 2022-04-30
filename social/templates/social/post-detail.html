@@ -62,7 +62,12 @@
 				</form>
 
 				{% for comment in comments %}
-				<p>{{comment.content}}</p>
+				<div class = "comment-box">
+					<img src = "{{ comment.author.profile_pic.url }}" class = "small-icon">
+					<p>{{comment.author.username}} - {{comment.created_on}}</p> 
+					<p></p>
+					<p>{{comment.content }}</p>
+				</div>
 				{% endfor %}
 			</div>
 		</div>
