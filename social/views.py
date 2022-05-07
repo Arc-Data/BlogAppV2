@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.http import HttpResponseRedirect
 from django.utils.timezone import datetime
 from django.urls import reverse, reverse_lazy
 from django.views.generic import View 
@@ -69,6 +70,7 @@ class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	def get_success_url(self):
 		return reverse('home')
 
+
 class DetailPostView(LoginRequiredMixin, View):
 	def get(self, request, pk, *args, **kwargs):
 		previous = self.request.META.get('HTTP_REFERER')
@@ -116,6 +118,20 @@ class DetailPostView(LoginRequiredMixin, View):
 		}
 		return render(request, 'social/post-detail.html', context)
 
+class CommentReplyView(LoginRequiredMixin, View):
+	def post(self, request, post_pk, pk, *args, **kwargs):
+		post = Post.objects.get(id = post_pk)
+		parent_comment = Comment.objects.get(id = pk)
+		form = CommentForm(request.POST)
+
+		if form.is_valid():
+			new_comment = form.save(commit = False)
+			new_comment.post = post
+			new_comment.author = request.user.profile
+			new_comment.parent = parent_comment
+			new_comment.save()
+
+		return redirect('post', post_pk)
 
 
 class ProfileView(LoginRequiredMixin, View):

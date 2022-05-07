@@ -38,12 +38,12 @@ class Comment(models.Model):
 		return super(Comment, self).save(*args, **kwargs)
 
 	@property
-	def child_comments(self):
-		return Comments.objects.filter(parent = 'self')
+	def children(self):
+		return Comment.objects.filter(parent = self).order_by('created_on').all()
 
 	@property 
 	def is_parent(self):
-		if parent is None:
+		if self.parent is None:
 			return True
 		return False
 	

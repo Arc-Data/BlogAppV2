@@ -20,7 +20,7 @@
 				<div class = "post-content">
 					<div>
 						<a href = "{% url 'profile' post.author.slug %}">
-							<img src = "{{post.author.profile_pic.url}}" class = "small-icon">
+							<img src = "{{post.author.profile_pic.url}}" class = "md-icon">
 						</a>
 					</div>
 					<div class = "post-detail">
@@ -52,42 +52,64 @@
 				<form method = "POST" action = "">
 					{% csrf_token %}
 					<div class = "post-content ">
-						<a href = "{% url 'profile' request.user.profile.slug%}"><img src = "{{request.user.profile.profile_pic.url}}" class = "small-icon"></a>
+						<a href = "{% url 'profile' request.user.profile.slug%}"><img src = "{{request.user.profile.profile_pic.url}}" class = "md-icon"></a>
 						{{	form.content }}
 					</div>
 					<div class = "comment-buttons">
-						<button type = "reset" class = "comment-btn comment-clear">Clear</button>
-						<button type = "submit" class = "comment-btn comment-post">Post</button>
+						<button type = "reset" class = "remove-default-btn comment-btn comment-clear">Clear</button>
+						<button type = "submit" class = "remove-default-btn comment-btn comment-post">Post</button>
 					</div>
 				</form>
 
 				{% for comment in comments %}
+				{% if comment.is_parent %}
 				<div class = "comment-box">
-					<img src = "{{ comment.author.profile_pic.url }}" class = "small-icon">
-					<p>{{comment.author.username}} - {{comment.created_on}}</p> 
+					<img src = "{{ comment.author.profile_pic.url }}" class = "md-icon">
+					<div class = "post-detail">
+						<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>
+						
+						{% if request.user.profile == comment.author %}
+						<div class = "flex-icons">
+							<a href = "{% url 'post-edit' post.id %}"><i class="fa-solid fa-pen" title = "Edit Post"></i></a>
+							<a href = "{% url 'post-delete' post.id %}">
+							<i class="fa-regular fa-trash-can"  title = "Delete Post"></i>
+							</a>
+						</div>
+						{% endif %}
+						
+					</div>
 					<p></p>
 					<p>{{comment.content }}</p>
 					<p></p>
 					<div class = "child-comment-footer">
-					<i class="fa-regular fa-heart"></i>
-					<a href = "#" onclick = "showReplyForm({{comment.id }})"><i class="fa-regular fa-message"></i> {{ comment.replies }}</p></a>
+						<button class = "remove-default-btn"><i class="fa-regular fa-heart"></i></button>
+						<button class = "remove-default-btn" onclick = "showReplyForm({{comment.id }})"><i class="fa-regular fa-message "></i> {{ comment.replies }}</p></a>
 					</div>
+					<div></div>
 				</div>
 
 				<div class ="child-comment-form d-none" id = "{{comment.id}}">
-					<form method = "POST" action = "">
+					<form method = "POST" action = "{% url 'add-reply' post.id comment.id %}">
 					{% csrf_token %}
+					<input type = "hidden" name = "next" value = "{{request.path}}">
 					<div class = "post-content ">
-						<a href = "{% url 'profile' request.user.profile.slug%}"><img src = "{{request.user.profile.profile_pic.url}}" class = "small-icon"></a>
-						{{	form.content }}
+						<a href = "{% url 'profile' request.user.profile.slug%}"><img src = "{{request.user.profile.profile_pic.url}}" class = "md-icon"></a>
+						{{ form.content }}
 					</div>
 					<div class = "comment-buttons">
-						<button type = "reset" class = "comment-btn comment-clear">Clear</button>
-						<button type = "submit" class = "comment-btn comment-post">Post</button>
+						<button class = "remove-default-btn comment-btn" onclick = "showReplyForm({{comment.id}})">Cancel</button>
+						<button type = "submit" class = "remove-default-btn comment-btn comment-post">Post</button>
 					</div>
-				</form>
+					</form>
 				</div>
+
+
+				
+				{% for child in comment.children %}
+					{% include 'child_comment.html' %}
+				{% endfor %}
 				<hr>
+				{% endif %}
 				{% endfor %}
 			</div>
 		</div>
