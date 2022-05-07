@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}{{post.body | truncatechars:20}}{% endblock %}
 
 {% block content %}
@@ -40,7 +40,7 @@
 				</div>
 				<div class = "post-footer">
 					<i class="fa-regular fa-heart"></i>
-					<i class="fa-regular fa-message"></i>
+					<p><i class="fa-regular fa-message"></i> {{ post.comments }}</p>
 					<i class="fa-solid fa-share-nodes"></i>
 				</div>
 			</div>
@@ -67,9 +67,30 @@
 					<p>{{comment.author.username}} - {{comment.created_on}}</p> 
 					<p></p>
 					<p>{{comment.content }}</p>
+					<p></p>
+					<div class = "child-comment-footer">
+					<i class="fa-regular fa-heart"></i>
+					<a href = "#" onclick = "showReplyForm({{comment.id }})"><i class="fa-regular fa-message"></i> {{ comment.replies }}</p></a>
+					</div>
 				</div>
+
+				<div class ="child-comment-form d-none" id = "{{comment.id}}">
+					<form method = "POST" action = "">
+					{% csrf_token %}
+					<div class = "post-content ">
+						<a href = "{% url 'profile' request.user.profile.slug%}"><img src = "{{request.user.profile.profile_pic.url}}" class = "small-icon"></a>
+						{{	form.content }}
+					</div>
+					<div class = "comment-buttons">
+						<button type = "reset" class = "comment-btn comment-clear">Clear</button>
+						<button type = "submit" class = "comment-btn comment-post">Post</button>
+					</div>
+				</form>
+				</div>
+				<hr>
 				{% endfor %}
 			</div>
 		</div>
 	</div>
+	<script src = "{% static 'js/reply.js' %}"></script>
 {% endblock %}

@@ -19,18 +19,33 @@ class Post(models.Model):
 		
 		return super(Post, self).save(*args, **kwargs)
 
+	@property 
+	def comments(self):
+		return len(Comment.objects.filter(post = self))
+
 
 class Comment(models.Model):
 	post = models.ForeignKey('Post', on_delete = models.CASCADE, blank = True)
 	author = models.ForeignKey('Profile', on_delete = models.CASCADE, blank = True)	
 	content = models.CharField(max_length = 200, blank = True)
 	created_on = models.DateTimeField(editable = False)
+	parent = models.ForeignKey('self', on_delete = models.CASCADE, blank = True, null = True)
 
 	def save(self, *args, **kwargs):
 		if not self.id:
 			self.created_on = timezone.now() 
 
 		return super(Comment, self).save(*args, **kwargs)
+
+	@property
+	def child_comments(self):
+		return Comments.objects.filter(parent = 'self')
+
+	@property 
+	def is_parent(self):
+		if parent is None:
+			return True
+		return False
 	
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete = models.CASCADE)
