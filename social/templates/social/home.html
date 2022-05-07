@@ -9,7 +9,7 @@
 		<div class = "main-container">
 			<div>
 				<div class = "post-container post-create">
-					<img src = "{{request.user.profile.profile_pic.url}}"class = "small-icon">
+					<img src = "{{request.user.profile.profile_pic.url}}"class = "md-icon">
 					<a href = "{% url 'create' %}" class = "post-bait"><p class = "">Create a post!</p></a>
 				</div>
 				{% for post in posts %}
@@ -18,7 +18,7 @@
 					
 					<div class = "post-content">
 						<a href = "{% url 'profile' post.author.slug %}" class = "profile-link">
-							<img src = "{{post.author.profile_pic.url}}" class = "small-icon">
+							<img src = "{{post.author.profile_pic.url}}" class = "md-icon">
 						</a>
 						<div class = "post-detail">
 							<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>

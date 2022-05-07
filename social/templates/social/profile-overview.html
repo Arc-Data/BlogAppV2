@@ -8,7 +8,7 @@
 					
 					<div class = "post-content">
 						<a href = "{% url 'profile' post.author.slug %}" class = "profile-link">
-							<img src = "{{post.author.profile_pic.url}}" class = "small-icon">
+							<img src = "{{post.author.profile_pic.url}}" class = "md-icon">
 						</a>
 						<div class = "post-detail">
 							<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>
