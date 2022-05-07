@@ -1,7 +1,7 @@
 <div class = "comment-box reply-box">
 	<img src = "{{ child.author.profile_pic.url }}" class = "sm-icon">
 	<div class = "post-detail">	
-		<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>
+		<p class = "details"> {{ post.author }} <br>Posted {{child.created_on|timesince}} ago </p>
 						
 		{% if request.user.profile == comment.author %}
 			<div class = "flex-icons">

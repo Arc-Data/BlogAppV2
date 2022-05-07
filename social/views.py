@@ -129,6 +129,7 @@ class CommentReplyView(LoginRequiredMixin, View):
 			new_comment.post = post
 			new_comment.author = request.user.profile
 			new_comment.parent = parent_comment
+			new_comment.created_on = timezone.now()
 			new_comment.save()
 
 		return redirect('post', post_pk)
