@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+<div class = "page-container">
+	<div class ="page-content">
+	<form method = "POST" action = "">
+	{% csrf_token %}
+	<h3>This comment "{{comment.content|truncatewords:5}}" will be deleted. Proceed?</h3>
+	{% if previous %}
+	<a href = "{{ previous }}" class = "btn">
+	{% else %}
+	<a href = "{% url 'home' %}" class = "btn">
+	{% endif %}
+	Cancel</a>
+	<button type = "submit" class = "btn btn-warning">Delete</button>
+	</form>
+	</div>
+</div>
+{% endblock %}

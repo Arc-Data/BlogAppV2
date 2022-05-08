@@ -134,6 +134,28 @@ class CommentReplyView(LoginRequiredMixin, View):
 
 		return redirect('post', post_pk)
 
+class DeleteCommentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+
+	template_name = 'social/delete-comment.html'
+	model = Comment
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['previous'] = self.request.META.get('HTTP_REFERER')
+
+		return context
+
+	def test_func(self):
+		return self.get_object().author == self.request.user.profile 
+
+	def get_success_url(self, **kwargs):
+		print(kwargs)
+		print("Hello")
+		return reverse_lazy('post', kwargs = {'pk': self.kwargs['post_pk']})
+
+class EditCommentView(View):
+	pass
+
 
 class ProfileView(LoginRequiredMixin, View):
 	def get(self, request, slug, *args, **kwargs):
