@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}{{post.body | truncatechars:20}}{% endblock %}
 
 {% block content %}
@@ -7,19 +7,112 @@
 	<div class = "page-container">
 		<div class = "page-content">
 			<div class = "main-container">
-			<h3><a href = "{{previous}}">Return</a></h3>
+			<h3>
+				{% if previous %}
+				<a href = "{{previous}}" class ="return-page">
+				<i class="fa-solid fa-caret-left"></i> Return</a>
+				{% else %}
+				<a href = "{% url 'home' %}" class = "return-page">
+				<i class="fa-solid fa-caret-left"></i> Home</a>
+				{% endif %}
+			</h3>
 			<div class = "post-container post-article post-full">
-				
-					<div class = "post-content">
+				<div class = "post-content">
+					<div>
 						<a href = "{% url 'profile' post.author.slug %}">
-							<img src = "{{post.author.profile_pic.url}}" class = "small-icon">
+							<img src = "{{post.author.profile_pic.url}}" class = "md-icon">
 						</a>
-						<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>
-						<p class = "post-body"> {{post.body }}</p>
 					</div>
-
+					<div class = "post-detail">
+						<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>
+						
+						{% if request.user.profile == post.author %}
+						<div class = "flex-icons">
+							<a href = "{% url 'post-edit' post.id %}"><i class="fa-solid fa-pen icon" title = "Edit Post"></i></a>
+							<a href = "{% url 'post-delete' post.id %}">
+							<i class="fa-regular fa-trash-can"  title = "Delete Post"></i>
+							</a>
+						</div>
+						{% endif %}
+						
+					</div>
+					<p class = "post-body"> {{post.body }}</p>
+				</div>
+				<div class = "post-footer">
+					<i class="fa-regular fa-heart"></i>
+					<p><i class="fa-regular fa-message"></i> {{ post.comments }}</p>
+					<i class="fa-solid fa-share-nodes"></i>
+				</div>
 			</div>
+			
+			<div class = "comments-section post-full">
+				<h3>Comments</h3>
+				<br>
+
+				<form method = "POST" action = "">
+					{% csrf_token %}
+					<div class = "post-content ">
+						<a href = "{% url 'profile' request.user.profile.slug%}"><img src = "{{request.user.profile.profile_pic.url}}" class = "md-icon"></a>
+						{{	form.content }}
+					</div>
+					<div class = "comment-buttons">
+						<button type = "reset" class = "remove-default-btn comment-btn comment-clear">Clear</button>
+						<button type = "submit" class = "remove-default-btn comment-btn comment-post">Post</button>
+					</div>
+				</form>
+
+				{% for comment in comments %}
+				{% if comment.is_parent %}
+				<div class = "comment-box">
+					<img src = "{{ comment.author.profile_pic.url }}" class = "md-icon">
+					<div class = "post-detail">
+						<p class = "details"> {{ post.author }} <br>Posted {{comment.created_on|timesince}} ago </p>
+						
+						{% if request.user.profile == comment.author %}
+						<div class = "flex-icons">
+							<a href = "{% url 'post-edit' post.id %}"><i class="fa-solid fa-pen" title = "Edit Post"></i></a>
+							<a href = "{% url 'delete-comment' post.id comment.id %}">
+							<i class="fa-regular fa-trash-can"  title = "Delete Post"></i>
+							</a>
+						</div>
+						{% endif %}
+						
+					</div>
+					<p></p>
+					<p>{{comment.content }}</p>
+					<p></p>
+					<div class = "child-comment-footer">
+						<button class = "remove-default-btn"><i class="fa-regular fa-heart"></i></button>
+						<button class = "remove-default-btn" onclick = "showReplyForm({{comment.id }})"><i class="fa-regular fa-message "></i> {{ comment.replies }}</p></a>
+					</div>
+					<div></div>
+				</div>
+
+				<div class ="child-comment-form d-none" id = "{{comment.id}}">
+					<form method = "POST" action = "{% url 'add-reply' post.id comment.id %}">
+					{% csrf_token %}
+					<input type = "hidden" name = "next" value = "{{request.path}}">
+					<div class = "post-content ">
+						<a href = "{% url 'profile' request.user.profile.slug%}"><img src = "{{request.user.profile.profile_pic.url}}" class = "md-icon"></a>
+						{{ form.content }}
+					</div>
+					<div class = "comment-buttons">
+						<button class = "remove-default-btn comment-btn" onclick = "showReplyForm({{comment.id}})">Cancel</button>
+						<button type = "submit" class = "remove-default-btn comment-btn comment-post">Post</button>
+					</div>
+					</form>
+				</div>
+
+
+				
+				{% for child in comment.children %}
+					{% include 'child_comment.html' %}
+				{% endfor %}
+				<hr>
+				{% endif %}
+				{% endfor %}
 			</div>
 		</div>
 	</div>
+	<script src = "{% static 'js/reply.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+<div class = "page-container">
+	<div class = "page-content">
+		<div class = "main-container">
+			<h3>
+				{% if previous %}
+				<a href = "{{ previous }}" class = "return-page"><i class="fa-solid fa-caret-left"></i> Return
+				{% else %}
+				<a href = "{% url 'home' %}" class = "return-page"><i class="fa-solid fa-caret-left"></i> Home
+				{% endif %}
+				</a>
+			</h3>
+			<div></div>
+			<div class = "post-container post-article">
+				<h3>Update Post</h3>
+				<form method = "POST" action = "">
+					{% csrf_token %}
+					<div class = "form-content">
+
+					<div class  ="form-group">
+					{{form.body}}
+					</div>
+				</div>
+					<div class = "form-footer">
+						<button type = "submit" class = "btn">Update Post</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
