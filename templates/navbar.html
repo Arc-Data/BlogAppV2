@@ -24,8 +24,35 @@
 		
 		<div class = "nav-links">
 			{% if user.is_authenticated %}
-			<a href = "{% url 'profile'  request.user.profile.slug  %}" class = "nav-link">Profile</a>
-			<a href = "{% url 'account_logout' %}" class = "nav-link">Logout</a>
+			<!-- <a href = "{% url 'profile'  request.user.profile.slug  %}" class = "nav-link"> -->
+			<span class = "nav-link nav-profile">
+				<a href = "{% url 'profile'  request.user.profile.slug  %}" class = "">
+					<img src = "{{ request.user.profile.profile_pic.url}}" class = "md-icon profile-icon">
+				</a>
+				<i class="fa-solid fa-caret-down"></i>
+				<div class = "nav-dropdown">
+					<div class = "dropdown-link">
+						<i class="fa-solid fa-user"></i>
+						<a href = "{% url 'profile'  request.user.profile.slug  %}">Profile</a>
+					</div>
+					<div class = "dropdown-link">
+						<i class="fa-solid fa-envelope"></i>
+						<a href = "#">Notifications</a>
+					</div>
+					<div class = "dropdown-link">
+						<i class="fa-solid fa-gear"></i>
+						<a href = "#">Settings</a>
+					</div>
+					<div class = "dropdown-link">
+						<i class="fa-solid fa-arrow-right-from-bracket"></i>
+						<a href = "{% url 'account_logout' %}">Logout</a>
+					</div>
+				
+				</div>
+			</span>
+			
+			<!-- </a> -->
+			
 			{% else %}
 			<a href = "{% url 'account_signup' %}" class = "nav-link">Sign Up</a>
 			<a href = "{% url 'account_login' %}" class = "nav-link">Login</a>
