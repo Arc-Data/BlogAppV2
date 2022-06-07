@@ -1,3 +1,7 @@
 {% if notifications %}
+<button class = "badge">
+	<a href = "{% url 'notifications' %}">
 	{{ notifications.count }}
+	</a>
+</button>
 {% endif %}

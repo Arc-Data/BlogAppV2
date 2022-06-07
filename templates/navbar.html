@@ -52,14 +52,9 @@
 				
 				</div>
 			</span>
-
-			<button class = "badge">
-				<a href = "{% url 'notifications' %}">
-				{% show_notifications %}
-				</a>
-			</button>
-			<!-- </a> -->
 			
+			{% show_notifications %}	
+				
 			{% else %}
 			<a href = "{% url 'account_signup' %}" class = "nav-link">Sign Up</a>
 			<a href = "{% url 'account_login' %}" class = "nav-link">Login</a>
