@@ -39,7 +39,7 @@
 					</div>
 					<div class = "dropdown-link">
 						<i class="fa-solid fa-envelope"></i>
-						<a href = "#">Notifications</a>
+						<a href = "{% url 'notifications' %}">Notifications</a>
 					</div>
 					<div class = "dropdown-link">
 						<i class="fa-solid fa-gear"></i>
@@ -54,7 +54,7 @@
 			</span>
 
 			<button class = "badge">
-				<a href = "#">
+				<a href = "{% url 'notifications' %}">
 				{% show_notifications %}
 				</a>
 			</button>

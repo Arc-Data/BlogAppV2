@@ -4,10 +4,11 @@ from django.http import HttpResponseRedirect
 from django.utils.timezone import datetime
 from django.urls import reverse, reverse_lazy
 from django.views.generic import View 
+from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from .models import Profile, Post, Comment
+from .models import Profile, Post, Comment, Notification
 from .forms import PostForm, ProfileForm, CommentForm
 
 class HomeView(LoginRequiredMixin, View):
@@ -259,4 +260,11 @@ class UnfollowProfile(LoginRequiredMixin, View):
 		profile.followers.remove(request.user)
 
 		return redirect('profile', slug)
-# Create your views here.
+
+class NotificationListView(LoginRequiredMixin, ListView):
+	model = Notification
+	template_name = "social/notifications.html"
+	context_object_name = "notifications"
+
+	def get_queryset(self):
+		return Notification.objects.filter(to_user=self.request.user)

@@ -21,6 +21,7 @@ urlpatterns = [
 	path('profile/<slug:slug>/unfollow/', UnfollowProfile.as_view(), name = "unfollow-profile"),
 
 
+	path('notification/', NotificationListView.as_view(), name = "notifications"),
 	path('profile/<slug:slug>/edit', ProfileEdit.as_view(), name = "profile-edit"),
 
 ]
