@@ -204,6 +204,23 @@ class AddCommentLikeView(View):
 		else:
 			comment.likes.add(request.user)
 
+			if request.user != comment.author.user:
+				is_existing = Notification.objects.filter(
+					notif_type=1,
+					to_user=comment.author.user,
+					from_user=request.user,
+					comment=comment,
+					)
+
+				if not is_existing:
+					notification = Notification.objects.create(
+						notif_type=1,
+						to_user=comment.author.user,
+						from_user=request.user,
+						comment=comment,
+						)
+					notification.save()
+
 		next = request.POST.get('next', '/')
 		return HttpResponseRedirect(next)
 
