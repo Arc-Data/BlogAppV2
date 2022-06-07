@@ -427,6 +427,7 @@ nav {
 
 .post-article:hover {
 	border:1px solid #1088eb;
+	cursor: pointer;
 }
 
 .post-container {
@@ -637,4 +638,10 @@ nav {
 
 .btn-icon i:hover {
 	color: #1088eb;
+}
+
+
+/* notif bg */
+.notif-bg {
+	background: white;
 }
