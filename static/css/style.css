@@ -611,3 +611,11 @@ nav {
 	outline: none;
 }
 
+
+.btn-icon p{
+	font-size: 16px;
+}
+
+.btn-icon i:hover {
+	color: #1088eb;
+}

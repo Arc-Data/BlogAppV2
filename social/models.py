@@ -12,6 +12,7 @@ class Post(models.Model):
 	author = models.ForeignKey('Profile', blank = True, null = True,on_delete = models.CASCADE)
 	body = models.TextField()
 	created_on = models.DateTimeField(editable = False)
+	likes = models.ManyToManyField(User, blank = True, related_name = "likes")
 
 	def save(self, *args, **kwargs):
 		if not self.id:
@@ -30,6 +31,7 @@ class Comment(models.Model):
 	content = models.CharField(max_length = 200, blank = True)
 	created_on = models.DateTimeField(editable = False)
 	parent = models.ForeignKey('self', on_delete = models.CASCADE, blank = True, null = True)
+	likes = models.ManyToManyField(User, blank = True, related_name = "comment_likes")
 
 	def save(self, *args, **kwargs):
 		if not self.id:

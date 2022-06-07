@@ -24,6 +24,25 @@ class HomeView(LoginRequiredMixin, View):
 		return render(request, 'social/home.html', context)
 
 
+class AddLikeView(View):
+	def post(self, request, pk, *args, **kwargs):
+		post = Post.objects.get(pk = pk)
+
+		is_liked = False
+
+		for like in post.likes.all():
+			if like == request.user:
+				is_liked = True 
+				break
+
+		if is_liked:
+			post.likes.remove(request.user)
+		else:
+			post.likes.add(request.user)
+
+		next = request.POST.get('next', '/')
+		return HttpResponseRedirect(next)
+
 class CreatePostView(CreateView):
 	form_class = PostForm
 	template_name = 'social/create-post.html'
@@ -155,6 +174,26 @@ class DeleteCommentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class EditCommentView(View):
 	pass
+
+class AddCommentLikeView(View):
+	def post(self, request, post_pk, pk, *args, **kwargs):
+		comment = Comment.objects.get(pk=pk)
+
+		is_liked = False 
+
+		for like in comment.likes.all():
+			if like == request.user:
+				is_liked = True
+				break 
+
+		if is_liked:
+			comment.likes.remove(request.user)
+		else:
+			comment.likes.add(request.user)
+
+		next = request.POST.get('next', '/')
+		return HttpResponseRedirect(next)
+
 
 
 class ProfileView(LoginRequiredMixin, View):

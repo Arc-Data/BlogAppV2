@@ -38,9 +38,25 @@
 					<p class = "post-body"> {{post.body }}</p>
 				</div>
 				<div class = "post-footer">
-					<i class="fa-regular fa-heart"></i>
-					<p><i class="fa-regular fa-message"></i> {{ post.comments }}</p>
-					<i class="fa-solid fa-share-nodes"></i>
+					<form method = "POST" action = "{% url 'like' post.pk %}">
+						{% csrf_token %}
+						<input type = "hidden" name = "next" value = "{{ request.path }}">
+						<button type = "submit" class = "remove-default-btn btn-icon">
+							<p>
+							<i class="fa-regular fa-heart"></i> {{ post.likes.count }}
+							</p>
+						</button>
+					</form>
+					<button class = "remove-default-btn btn-icon">
+						<p>
+							<i class="fa-regular fa-message"></i> {{ post.comments }}
+						</p>
+					</button>
+					<button class = "remove-default-btn btn-icon">
+						<p>
+							<i class="fa-solid fa-share-nodes"></i>
+						</p>
+					</button>
 				</div>
 			</div>
 			
@@ -81,8 +97,16 @@
 					<p>{{comment.content }}</p>
 					<p></p>
 					<div class = "child-comment-footer">
-						<button class = "remove-default-btn"><i class="fa-regular fa-heart"></i></button>
-						<button class = "remove-default-btn" onclick = "showReplyForm({{comment.id }})"><i class="fa-regular fa-message "></i> {{ comment.replies }}</p></a>
+						<form method = "POST" action = "{% url 'add-comment-like' post.pk comment.pk %}">
+							{% csrf_token %}
+							<input type = "hidden" name = "next" value = "{{ request.path }}">
+							<button class = "remove-default-btn btn-icon">
+								<p><i class="fa-regular fa-heart"></i> {{ comment.likes.count }}</p>
+							</button>
+						</form>
+						<button class = "remove-default-btn btn-icon" onclick = "showReplyForm({{ comment.id }})">
+							<p><i class="fa-regular fa-message "></i> {{ comment.replies }}</p>
+						</button>
 					</div>
 					<div></div>
 				</div>
