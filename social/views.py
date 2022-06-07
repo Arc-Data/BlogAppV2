@@ -41,6 +41,18 @@ class AddLikeView(View):
 		else:
 			post.likes.add(request.user)
 
+			if request.user != post.author.user:
+				existing = Notification.objects.filter(notif_type=1, to_user=post.author.user, from_user=request.user, post=post)
+				print(existing)
+				if not existing:
+					notification = Notification.objects.create(
+						notif_type=1,
+						to_user=post.author.user,
+						from_user=request.user,
+						post=post, 
+						)
+					notification.save()
+
 		next = request.POST.get('next', '/')
 		return HttpResponseRedirect(next)
 

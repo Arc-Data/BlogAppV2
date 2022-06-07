@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class = "page-container">
+	<div class ="page-content">
 	{% for notification in notifications %}
-		<p>{{ notification }}</p>
 	{% endfor %}
+	</div>
+</div>
 {% endblock %}
