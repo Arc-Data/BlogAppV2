@@ -26,9 +26,19 @@
 					</div>
 					
 					<div class = "post-footer">
-						<i class="fa-regular fa-heart"></i>
-						<i class="fa-regular fa-message"></i>
-						<i class="fa-solid fa-share-nodes"></i>
+						<form method = "POST" action = "{% url 'like' post.id %}">
+							{% csrf_token %}
+							<input type = "hidden" name = "next" value = "{{ request.path }}">
+							<button class = "remove-default-btn btn-icon"> 
+								<p><i class="fa-regular fa-heart"></i> {{ post.likes.count }}</p>
+							</button>
+						</form>
+						<button class = "remove-default-btn btn-icon">
+							<p><i class="fa-regular fa-message"></i></p>
+						</button>
+						<button class = "remove-default-btn btn-icon">
+							<p><i class="fa-solid fa-share-nodes"></i></p>
+						</button>
 					</div>
 
 					<a href ="{% url 'post' post.id %}" class = "post-link"></a>
