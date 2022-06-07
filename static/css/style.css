@@ -154,6 +154,25 @@ nav {
 	pointer-events: auto;
 	opacity: 1;
 }
+
+.badge{
+	background: red;
+	height: 25px;
+	width: 25px;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.badge:hover {
+	/*background: black;*/
+}
+
+.badge a {
+	color: white;
+}
+
+
 /* page-related */
 
 .page-container {

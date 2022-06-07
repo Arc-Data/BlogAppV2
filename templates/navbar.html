@@ -1,3 +1,5 @@
+{% load custom_tags %}
+
 <nav>
 	<div class = "nav-container">
 		<div>
@@ -50,7 +52,12 @@
 				
 				</div>
 			</span>
-			
+
+			<button class = "badge">
+				<a href = "#">
+				{% show_notifications %}
+				</a>
+			</button>
 			<!-- </a> -->
 			
 			{% else %}
