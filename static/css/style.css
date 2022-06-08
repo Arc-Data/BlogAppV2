@@ -629,6 +629,11 @@ nav {
 	background: transparent;
 	border: none;
 	outline: none;
+
+}
+
+.remove-default-btn:hover {
+	cursor: pointer;
 }
 
 

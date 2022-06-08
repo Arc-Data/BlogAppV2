@@ -22,6 +22,9 @@ urlpatterns = [
 
 
 	path('notification/', NotificationListView.as_view(), name = "notifications"),
+	path('notification/<int:notif_pk>/post/<int:post_pk>/', NotificationPostRedirectView.as_view(), name = 'notif-post-redirect'),
+	path('notification/<int:notif_pk>/post/<slug:slug>/', NotificationProfileRedirectView.as_view(), name = 'notif-profile-redirect'),
+	
 	path('profile/<slug:slug>/edit', ProfileEdit.as_view(), name = "profile-edit"),
 
 ]

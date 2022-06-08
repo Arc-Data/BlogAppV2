@@ -140,6 +140,18 @@ class DetailPostView(LoginRequiredMixin, View):
 			new_comment.post = post 
 			new_comment.save()
 
+
+			if request.user != post.author.user:
+				notification = Notification.objects.create(
+					notif_type=2,
+					to_user=post.author.user,
+					from_user=request.user, 
+					post=post.id,
+					)
+
+				notification.save()
+
+
 			return redirect('post', post.id)
 
 		context = {
@@ -163,6 +175,15 @@ class CommentReplyView(LoginRequiredMixin, View):
 			new_comment.parent = parent_comment
 			new_comment.created_on = timezone.now()
 			new_comment.save()
+
+			if request.user != parent_comment.author.user:
+				notification = Notification.objects.create(
+					notif_type=2,
+					to_user=parent_comment.author.user,
+					from_user=request.user,
+					post=post,
+					comment=parent_comment,
+					)
 
 		return redirect('post', post_pk)
 
@@ -281,6 +302,20 @@ class FollowProfile(LoginRequiredMixin, View):
 		profile = Profile.objects.get(slug = slug)
 		profile.followers.add(request.user)
 
+		is_existing = Notification.objects.filter(
+			notif_type=3,
+			to_user=profile.user,
+			from_user=request.user,
+			)
+
+		if not is_existing:
+			notification = Notification.objects.create(
+				notif_type=3,
+				to_user=profile.user,
+				from_user=request.user,
+				)
+			notification.save()
+
 		return redirect('profile', slug)
 
 class UnfollowProfile(LoginRequiredMixin, View):
@@ -297,3 +332,21 @@ class NotificationListView(LoginRequiredMixin, ListView):
 
 	def get_queryset(self):
 		return Notification.objects.filter(to_user=self.request.user)
+
+class NotificationPostRedirectView(LoginRequiredMixin, View):
+	def post(self, request, notif_pk, post_pk, *args, **kwargs):
+
+		notification = Notification.objects.get(id = notif_pk)
+		notification.user_has_seen = True 
+		notification.save()
+
+		return redirect('post', post_pk)
+
+class NotificationProfileRedirectView(LoginRequiredMixin, View):
+	def post(self, request, notif_pk, slug, *args, **kwargs):
+
+		notification = Notification.objects.get(id = notif_pk)
+		notification.user_has_seen = True 
+		notification.save()
+
+		return redirect('profile', slug)
