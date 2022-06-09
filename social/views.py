@@ -146,7 +146,7 @@ class DetailPostView(LoginRequiredMixin, View):
 					notif_type=2,
 					to_user=post.author.user,
 					from_user=request.user, 
-					post=post.id,
+					post=post,
 					)
 
 				notification.save()
@@ -331,7 +331,7 @@ class NotificationListView(LoginRequiredMixin, ListView):
 	context_object_name = "notifications"
 
 	def get_queryset(self):
-		return Notification.objects.filter(to_user=self.request.user)
+		return Notification.objects.filter(to_user=self.request.user).order_by('-date')
 
 class NotificationPostRedirectView(LoginRequiredMixin, View):
 	def post(self, request, notif_pk, post_pk, *args, **kwargs):

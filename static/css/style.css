@@ -481,6 +481,10 @@ nav {
 	z-index: 30;
 }
 
+.row-span-full {
+	grid-row: 1/-1;
+}
+
 .flex-icons {
 	position: relative;
 	display: flex;
@@ -634,6 +638,7 @@ nav {
 
 .remove-default-btn:hover {
 	cursor: pointer;
+	border-right: 5px solid #1d1d1d;
 }
 
 
@@ -649,4 +654,15 @@ nav {
 /* notif bg */
 .notif-bg {
 	background: white;
+}
+
+
+.unseen {
+	border-right: 5px solid #1088eb;
+}
+
+
+.notif-details {
+	text-align: right;
+	
 }
