@@ -21,12 +21,10 @@ urlpatterns = [
 	path('profile/<slug:slug>/', ProfileView.as_view(), name = "profile"),
 	path('profile/<slug:slug>/follow/', FollowProfile.as_view(), name = "follow-profile"),
 	path('profile/<slug:slug>/unfollow/', UnfollowProfile.as_view(), name = "unfollow-profile"),
-
+	path('profile/<slug:slug>/edit', ProfileEdit.as_view(), name = "profile-edit"),
 
 	path('notification/', NotificationListView.as_view(), name = "notifications"),
 
 	path('notification/<int:notif_pk>/', NotificationRedirectView.as_view(), name = "notif-redirect"),
-
-	path('profile/<slug:slug>/edit', ProfileEdit.as_view(), name = "profile-edit"),
 
 ]
