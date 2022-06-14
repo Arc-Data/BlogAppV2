@@ -212,7 +212,7 @@ class EditCommentView(View):
 class AddCommentLikeView(View):
 	def post(self, request, post_pk, pk, *args, **kwargs):
 		comment = Comment.objects.get(pk=pk)
-
+		post = Post.objects.get(id = pk)
 		is_liked = False 
 
 		for like in comment.likes.all():
@@ -248,11 +248,14 @@ class AddCommentLikeView(View):
 
 class CommentThreadView(View):
 	def get(self, request, post_pk, comment_pk, *args, **kwargs):
-		context = {
+		comment = Comment.objects.get(pk = comment_pk)	
+		post = Post.objects.get(pk = post_pk)
 
+		context = {
+			'comment':comment,
+			'post':post,
 		}
 		return render(request, 'social/comment-thread.html', context)
-
 
 class ProfileView(LoginRequiredMixin, View):
 	def get(self, request, slug, *args, **kwargs):
@@ -303,7 +306,6 @@ class ProfileEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	def get_success_url(self, **kwargs):
 		return reverse_lazy('profile', kwargs = {'slug': self.kwargs['slug']})
 
-
 class FollowProfile(LoginRequiredMixin, View):
 	def post(self, request, slug, *args, **kwargs):
 		profile = Profile.objects.get(slug = slug)
@@ -340,20 +342,21 @@ class NotificationListView(LoginRequiredMixin, ListView):
 	def get_queryset(self):
 		return Notification.objects.filter(to_user=self.request.user).order_by('-date')
 
-class NotificationPostRedirectView(LoginRequiredMixin, View):
-	def post(self, request, notif_pk, post_pk, *args, **kwargs):
-
+class NotificationRedirectView(LoginRequiredMixin, View):
+	def post(self, request, notif_pk, *args, **kwargs):
 		notification = Notification.objects.get(id = notif_pk)
-		notification.user_has_seen = True 
+		notification.user_has_seen = True
 		notification.save()
 
-		return redirect('post', post_pk)
-
-class NotificationProfileRedirectView(LoginRequiredMixin, View):
-	def post(self, request, notif_pk, slug, *args, **kwargs):
-
-		notification = Notification.objects.get(id = notif_pk)
-		notification.user_has_seen = True 
-		notification.save()
-
-		return redirect('profile', slug)
+		if notification.notif_type == 1:
+			if notification.post:
+				return redirect('post', notification.post.id)
+			elif notification.comment:
+				return redirect('comment-thread', notification.comment.post.id, notification.comment.id)
+		elif notification.notif_type == 2:
+			if notification.post and notification.comment:
+				return redirect('comment-thread', notification.post.id, notification.comment.id)
+			else:
+				return redirect('post', notification.post.id)
+		elif notification.notif_type == 3:
+			return redirect('profile', notification.from_user.profile.slug)

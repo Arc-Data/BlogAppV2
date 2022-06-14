@@ -22,11 +22,8 @@ urlpatterns = [
 	path('profile/<slug:slug>/follow/', FollowProfile.as_view(), name = "follow-profile"),
 	path('profile/<slug:slug>/unfollow/', UnfollowProfile.as_view(), name = "unfollow-profile"),
 
+	path('notification/<int:notif_pk>/', NotificationRedirectView.as_view(), name = "notif-redirect"),
 
-	path('notification/', NotificationListView.as_view(), name = "notifications"),
-	path('notification/<int:notif_pk>/post/<int:post_pk>/', NotificationPostRedirectView.as_view(), name = 'notif-post-redirect'),
-	path('notification/<int:notif_pk>/post/<slug:slug>/', NotificationProfileRedirectView.as_view(), name = 'notif-profile-redirect'),
-	
 	path('profile/<slug:slug>/edit', ProfileEdit.as_view(), name = "profile-edit"),
 
 ]

@@ -2,5 +2,71 @@
 
 {% block content %}
 
+<div class = "page-container">
+	<div class = "page-content">
+		<div class = "main-container">
+			<h3><a href ="{% url 'post' post.pk %}" style = "color:#1088eb;">You are viewing a comment thread. View the full post?</a></h3>
+			<div class ="post-container post-full">
+				<div class = "post-content">
+					<div>
+						<a href = "{% url 'profile' comment.author.slug %}">
+							<img src = "{{comment.author.profile_pic.url}}" class = "md-icon">
+						</a>
+					</div>
+					<div class = "post-detail">
+						<p class = "details"> {{ post.author }} <br>Posted {{comment.created_on|timesince}} ago </p>
+						
+						<div class = "flex-icons">
+							{% if request.user.profile == comment.author %}
+							<a href = "{% url 'post-edit' post.id %}"><i class="fa-solid fa-pen" title = "Edit Post"></i></a>
+							<a href = "{% url 'delete-comment' post.id comment.id %}">
+							<i class="fa-regular fa-trash-can"  title = "Delete Post"></i>
+							</a>
+							{% endif %}
+						</div>
+					</div>
+					<p></p>
+					<p>{{comment.content }}</p>
+					<p></p>
+					<div class = "child-comment-footer">
+						<form method = "POST" action = "{% url 'add-comment-like' post.pk comment.pk %}">
+							{% csrf_token %}
+							<input type = "hidden" name = "next" value = "{{ request.path }}">
+							<button class = "remove-default-btn btn-icon">
+								<p><i class="fa-regular fa-heart"></i> {{ comment.likes.count }}</p>
+							</button>
+						</form>
+						<button class = "remove-default-btn btn-icon" onclick = "showReplyForm({{ comment.id }})">
+							<p><i class="fa-regular fa-message "></i> {{ comment.replies }}</p>
+						</button>
+					</div>
+					<div></div>
+				</div>
+				<div class ="child-comment-form d-none" id = "{{comment.id}}">
+					<form method = "POST" action = "{% url 'add-reply' post.id comment.id %}">
+					{% csrf_token %}
+					<input type = "hidden" name = "next" value = "{{request.path}}">
+					<div class = "post-content ">
+						<a href = "{% url 'profile' request.user.profile.slug%}"><img src = "{{request.user.profile.profile_pic.url}}" class = "md-icon"></a>
+						{{ form.content }}
+					</div>
+					<div class = "comment-buttons">
+						<button class = "remove-default-btn comment-btn" onclick = "showReplyForm({{comment.id}})">Cancel</button>
+						<button type = "submit" class = "remove-default-btn comment-btn comment-post">Post</button>
+					</div>
+					</form>
+				</div>
+				{% if comment.children %}
+				<div>
+				{% for child in comment.children %}
+					{% include 'child_comment.html' %}
+				{% endfor %}
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
 
 {% endblock %}

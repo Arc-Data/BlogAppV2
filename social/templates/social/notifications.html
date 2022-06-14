@@ -13,48 +13,43 @@
 					<div class = "post-content">
 						<img src = "{{notification.from_user.profile.profile_pic.url}}" class = "md-icon row-span-full">
 
-						{% if notification.notif_type == 1 %}
-						{% if notification.post %}
-						<form method = "POST" action = "{% url 'notif-post-redirect' notification.id notification.post.id %}">
-							{% csrf_token %}
-							<p>@{{notification.from_user.username}} has liked your post</p>
-							<p class = "details notif-details">{{notification.date|timesince}} ago</p>
-							<button type = "submit" class = "post-link remove-default-btn notif-btn"></a>
-						</form>
-						{% elif notification.comment %}
-						<form method = "POST" action = "{% url 'notif-post-redirect' notification.id notification.comment.post.id %}">
-							{% csrf_token %}
-						<p>@{{notification.from_user.username}} has liked your comment</p>
-						<p class = "details notif-details">{{notification.date|timesince}} ago</p>
-						<button type = "submit" class = "post-link remove-default-btn notif-btn"></a>
-
-						</form>
-						{% endif %}
-
-						{% elif notification.notif_type == 2 %}
-						<form method = "POST" action = "{% url 'notif-post-redirect' notification.id notification.post.id %}">
+						<form method = "POST" action = "{% url 'notif-redirect' notification.id %}">
 							{% csrf_token %}
 
-							{% if notification.post and notification.comment %}	
-							<p>@{{notification.from_user.username}} replied to your comment</p>
+							{% if notification.notif_type == 1 %}
+								
+								{% if notification.post %}
+								
+								<p>@{{notification.from_user.username}} has liked your post</p>
+								<p class = "details notif-details">{{notification.date|timesince}} ago</p>
 							
-							{% else %}
+								{% elif notification.comment %}
+								
+								<p>@{{notification.from_user.username}} has liked your comment</p>
+								<p class = "details notif-details">{{notification.date|timesince}} ago</p>
 
-							<p>@{{notification.from_user.username}} commented on your post</p>
+								{% endif %}
+
+							{% elif notification.notif_type == 2 %}
+
+								{% if notification.post and notification.comment %}	
+									
+								<p>@{{notification.from_user.username}} replied to your comment</p>
+								<p class = "details notif-details">		{{notification.date|timesince}} ago</p>
+
+								{% else %}
+
+								<p>@{{notification.from_user.username}} commented on your post</p>
+								<p class = "details notif-details">{{notification.date|timesince}} ago</p>
+
+								{% endif %}
+
+							{% elif notification.notif_type == 3 %}
+								<p>@{{notification.from_user.username}} followed you</p>
+								<p class = "details notif-details">{{notification.date|timesince}} ago</p>
 							{% endif %}
-							<p class = "details notif-details">{{notification.date|timesince}} ago</p>
-
-							<button type = "submit" class = "post-link remove-default-btn notif-btn"></a>
-						</form>
-
-						{% elif notification.notif_type == 3 %}
-						<form method = "POST" action = "{% url 'notif-profile-redirect' notification.id notification.from_user.profile.slug %}">
-							{% csrf_token %}
-							<p>@{{notification.from_user.username}} followed you</p>
-							<p class = "details notif-details">{{notification.date|timesince}} ago</p>
 							<button type ="submit" class = "post-link remove-default-btn notif-btn">
 						</form>
-						{% endif %}
 
 					</div>
 				
