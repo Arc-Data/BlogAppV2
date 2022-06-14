@@ -10,6 +10,8 @@ urlpatterns = [
 	path('post/<int:pk>/like', AddLikeView.as_view(), name = "like"),
 	path('post/<int:pk>/edit/', EditPostView.as_view(), name = 'post-edit'),
 	path('post/<int:pk>/delete/', DeletePostView.as_view(), name = "post-delete"),
+	path('post/<int:post_pk>/thread/<int:comment_pk>/', CommentThreadView.as_view(), name = "comment-thread"),
+
 	path('post/<int:post_pk>/<int:pk>/reply', CommentReplyView.as_view(), name = "add-reply"),
 	path('post/<int:post_pk>/<int:pk>/delete', DeleteCommentView.as_view(), name = "delete-comment"),
 	path('post/<int:post_pk>/<int:pk>/update', EditCommentView.as_view(), name = "edit-comment"),

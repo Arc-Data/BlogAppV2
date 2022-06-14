@@ -246,6 +246,13 @@ class AddCommentLikeView(View):
 		return HttpResponseRedirect(next)
 
 
+class CommentThreadView(View):
+	def get(self, request, post_pk, comment_pk, *args, **kwargs):
+		context = {
+
+		}
+		return render(request, 'social/comment-thread.html', context)
+
 
 class ProfileView(LoginRequiredMixin, View):
 	def get(self, request, slug, *args, **kwargs):
