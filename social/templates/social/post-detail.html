@@ -25,14 +25,14 @@
 					<div class = "post-detail">
 						<p class = "details"> {{ post.author }} <br>Posted {{post.created_on|timesince}} ago </p>
 						
-						{% if request.user.profile == post.author %}
 						<div class = "flex-icons">
+						{% if request.user.profile == post.author %}
 							<a href = "{% url 'post-edit' post.id %}"><i class="fa-solid fa-pen icon" title = "Edit Post"></i></a>
 							<a href = "{% url 'post-delete' post.id %}">
 							<i class="fa-regular fa-trash-can"  title = "Delete Post"></i>
 							</a>
-						</div>
 						{% endif %}
+						</div>
 						
 					</div>
 					<p class = "post-body"> {{post.body }}</p>
@@ -61,7 +61,6 @@
 			</div>
 			
 			<div class = "comments-section post-full">
-				<h3>Comments</h3>
 				<br>
 
 				<form method = "POST" action = "">
@@ -83,14 +82,15 @@
 					<div class = "post-detail">
 						<p class = "details"> {{ post.author }} <br>Posted {{comment.created_on|timesince}} ago </p>
 						
-						{% if request.user.profile == comment.author %}
 						<div class = "flex-icons">
+							<a href = "#"><i class="fa-solid fa-link"></i></a>
+							{% if request.user.profile == comment.author %}
 							<a href = "{% url 'post-edit' post.id %}"><i class="fa-solid fa-pen" title = "Edit Post"></i></a>
 							<a href = "{% url 'delete-comment' post.id comment.id %}">
 							<i class="fa-regular fa-trash-can"  title = "Delete Post"></i>
 							</a>
-						</div>
 						{% endif %}
+						</div>
 						
 					</div>
 					<p></p>
@@ -126,14 +126,16 @@
 					</form>
 				</div>
 
-
-				
+				{% if comment.children %}
+				<div>
 				{% for child in comment.children %}
 					{% include 'child_comment.html' %}
 				{% endfor %}
-				<hr>
+				</div>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
+				</div>
 			</div>
 		</div>
 	</div>

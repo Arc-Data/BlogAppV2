@@ -19,14 +19,14 @@
 							{% csrf_token %}
 							<p>@{{notification.from_user.username}} has liked your post</p>
 							<p class = "details notif-details">{{notification.date|timesince}} ago</p>
-							<button type = "submit" class = "post-link remove-default-btn"></a>
+							<button type = "submit" class = "post-link remove-default-btn notif-btn"></a>
 						</form>
 						{% elif notification.comment %}
 						<form method = "POST" action = "{% url 'notif-post-redirect' notification.id notification.comment.post.id %}">
 							{% csrf_token %}
 						<p>@{{notification.from_user.username}} has liked your comment</p>
 						<p class = "details notif-details">{{notification.date|timesince}} ago</p>
-						<button type = "submit" class = "post-link remove-default-btn"></a>
+						<button type = "submit" class = "post-link remove-default-btn notif-btn"></a>
 
 						</form>
 						{% endif %}
@@ -44,7 +44,7 @@
 							{% endif %}
 							<p class = "details notif-details">{{notification.date|timesince}} ago</p>
 
-							<button type = "submit" class = "post-link remove-default-btn"></a>
+							<button type = "submit" class = "post-link remove-default-btn notif-btn"></a>
 						</form>
 
 						{% elif notification.notif_type == 3 %}
@@ -52,7 +52,7 @@
 							{% csrf_token %}
 							<p>@{{notification.from_user.username}} followed you</p>
 							<p class = "details notif-details">{{notification.date|timesince}} ago</p>
-							<button type ="submit" class = "post-link remove-default-btn">
+							<button type ="submit" class = "post-link remove-default-btn notif-btn">
 						</form>
 						{% endif %}
 

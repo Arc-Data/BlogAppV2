@@ -162,16 +162,24 @@ nav {
 	border: none;
 	border-radius: 50%;
 	cursor: pointer;
+	
+	position: relative;
 }
+
+.badge a{
+	position: absolute;
+	color: white;
+	height: 100%;
+	width: 100%;
+	font-weight: 800;
+	text-align: center;
+
+}
+
 
 .badge:hover {
-	/*background: black;*/
+	opacity: .9;
 }
-
-.badge a {
-	color: white;
-}
-
 
 /* page-related */
 
@@ -485,14 +493,27 @@ nav {
 	grid-row: 1/-1;
 }
 
-.flex-icons {
+.flex-icons{
 	position: relative;
 	display: flex;
 	gap: 20px;
 	z-index: 30;
 }
 
+.flex-icons i {
+	color: #ccc;
+}
+
+
+.flex-icons i:hover {
+	color: #1088eb;
+}
 /* comment-section */
+
+.comments-section > form{
+	margin-bottom: 40px;
+}
+
 
 .comment-buttons {
 	display: flex;
@@ -587,18 +608,33 @@ nav {
 }
 
 
+
+
 .comment-box {
 	display: grid;
 	grid-template-columns: auto 1fr;
 	grid-gap: 10px;
 	align-items: center;
 	padding: 12px 16px;
+	margin-bottom: 10px;
+	background: white;
+
 }
 
+.comment-box:last-child {
+	border-bottom: 1px solid black;
+}
+
+
 .reply-box {
-	margin-left: 40px;
-	background: white;
-	border-left: 1px solid #1088eb;
+	margin-left: 70px;
+	background: #ccc;
+
+
+}
+
+.reply-box:last-child {
+	border-bottom: 1px solid #ccc;
 }
 
 .child-comment-footer {
@@ -636,10 +672,11 @@ nav {
 
 }
 
-.remove-default-btn:hover {
+.notif-btn:hover{
 	cursor: pointer;
 	border-right: 5px solid #1d1d1d;
 }
+
 
 
 .btn-icon p{
